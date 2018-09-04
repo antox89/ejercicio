@@ -11,7 +11,7 @@ public class MiniWindows extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
 
         jmi_logout.setEnabled(false);
-        jm_admin.setEnabled(false);
+        jm_admin.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -584,6 +584,7 @@ public class MiniWindows extends javax.swing.JFrame {
                 
             }
 
+            jm_admin.setVisible(true);
             tf_login_password.setText("");
             tf_login_user.setText("");
             jmi_login.setEnabled(false);
@@ -611,6 +612,7 @@ public class MiniWindows extends javax.swing.JFrame {
         int response = JOptionPane.showConfirmDialog(this, "¿Cerrar sesión de Usuario?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (response == JOptionPane.OK_OPTION) {
+            jm_admin.setVisible(false);
             jmi_login.setEnabled(true);
             jmi_logout.setEnabled(false);
         }
