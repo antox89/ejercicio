@@ -11,9 +11,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 public class MiniWindows extends javax.swing.JFrame {
 
@@ -33,7 +37,9 @@ public class MiniWindows extends javax.swing.JFrame {
         jd_explorer = new javax.swing.JDialog();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        jtree1 = new javax.swing.JTree();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tree2 = new javax.swing.JTree();
         jd_editorTexto = new javax.swing.JDialog();
         jd_visorImagenes = new javax.swing.JDialog();
         jd_agenda = new javax.swing.JDialog();
@@ -95,8 +101,12 @@ public class MiniWindows extends javax.swing.JFrame {
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Correo");
         treeNode1.add(treeNode2);
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane1.setViewportView(jTree1);
+        jtree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane1.setViewportView(jtree1);
+
+        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Mi PC");
+        tree2.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane2.setViewportView(tree2);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -105,13 +115,17 @@ public class MiniWindows extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(448, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(278, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -594,8 +608,53 @@ public class MiniWindows extends javax.swing.JFrame {
 
     private void jl_tb_explorerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_tb_explorerMouseClicked
         mostrarFBI();
+        
+        DefaultTreeModel modelo1 = (DefaultTreeModel)jtree1.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)modelo1.getRoot();
+        
+        //JFileChooser jf = new JFileChooser("./");
+        //jf.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        //int s = jf.showOpenDialog(this);
+        
+        File f = new File("./Z");
+        //File f = jf.getSelectedFile();
+        
+        modelo1.setRoot(new DefaultMutableTreeNode(f.getName()));
+        listarTodo(f, (DefaultMutableTreeNode)modelo1.getRoot());
     }//GEN-LAST:event_jl_tb_explorerMouseClicked
 
+    public void listarTodo(File raiz, DefaultMutableTreeNode nodo){
+        try{
+            ArrayList<File> fl1= new ArrayList();
+            ArrayList<File> fl2= new ArrayList();
+            ArrayList<File> fl3= new ArrayList();
+            
+            for (File file : raiz.listFiles()) {
+                if(file.isDirectory()){
+                    fl1.add(file);
+                }else{
+                    fl2.add(file);
+                }
+            }
+            fl3.addAll(fl1);
+            fl3.addAll(fl2);
+            
+            for (File temp : fl3) {
+                if(temp.isFile()){
+                    DefaultMutableTreeNode n = new DefaultMutableTreeNode(temp.getName());
+                    nodo.add(n);
+                }else{
+                    DefaultMutableTreeNode n = new DefaultMutableTreeNode(temp.getName());
+                    nodo.add(n);
+                    listarTodo(raiz, n);
+                }
+            }
+            
+        }catch(Exception e){
+            
+        }
+    }
+    
     private void jl_tb_explorerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_tb_explorerMouseEntered
         jl_tb_explorer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/48x48_explorer.png")));
     }//GEN-LAST:event_jl_tb_explorerMouseEntered
@@ -803,16 +862,12 @@ public class MiniWindows extends javax.swing.JFrame {
             ap.agregarUsuario(u);
             ap.escribirUsuarioT();
 
-            //adminUsuario ad = new adminUsuario();
-            //ad.registrarUsuario(usuario, password);
             adminDirectorio d = new adminDirectorio();
             d.crearDirectorioUsuario(usuario);
 
             try {
-                System.out.println("Holaaaaaaaa");
                 BufferedReader input = new BufferedReader(new FileReader("./Z/Sistema/data.txt"));
                 String line = input.readLine();
-                System.out.println("holaaaaaa");
                 while (line != null) {
                     StringTokenizer st = new StringTokenizer(line);
                     if (tf_admin_agregar_user.getText().equals(st.nextToken())) {
@@ -974,10 +1029,10 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JTree jTree1;
     private javax.swing.JDialog jd_admin_users;
     private javax.swing.JDialog jd_agenda;
     private javax.swing.JDialog jd_editorTexto;
@@ -1003,10 +1058,12 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmi_admin_users;
     private javax.swing.JMenuItem jmi_login;
     private javax.swing.JMenuItem jmi_logout;
+    private javax.swing.JTree jtree1;
     private javax.swing.JPasswordField tf_admin_agregar_password;
     private javax.swing.JTextField tf_admin_agregar_user;
     private javax.swing.JPasswordField tf_login_password;
     private javax.swing.JTextField tf_login_user;
+    private javax.swing.JTree tree2;
     // End of variables declaration//GEN-END:variables
 
     String admin = "admin", password = "admin";
