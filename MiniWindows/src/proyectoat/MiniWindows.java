@@ -4,6 +4,8 @@ import java.io.File;
 import javax.swing.JOptionPane;
 import filesystem.*;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -16,8 +18,11 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
 import javax.swing.text.Style;
@@ -86,6 +91,14 @@ public class MiniWindows extends javax.swing.JFrame {
         tf_admin_agregar_password = new javax.swing.JPasswordField();
         bt_admin_agregar_crearUsuario = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
+        ppm_desktop = new javax.swing.JPopupMenu();
+        jmi_ppm_desktop_bg = new javax.swing.JMenuItem();
+        ppm_editor = new javax.swing.JPopupMenu();
+        jmi_ppm_copy = new javax.swing.JMenuItem();
+        jmi_ppm_cut = new javax.swing.JMenuItem();
+        jmi_ppm_paste = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jmi_ppm_select = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         jl_tb_explorer = new javax.swing.JLabel();
@@ -97,6 +110,7 @@ public class MiniWindows extends javax.swing.JFrame {
         jl_tb_msgr = new javax.swing.JLabel();
         jl_tb_socialnet = new javax.swing.JLabel();
         jl_tb_netbeens = new javax.swing.JLabel();
+        jlb_bg = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jm_start = new javax.swing.JMenu();
         jmi_login = new javax.swing.JMenuItem();
@@ -230,7 +244,7 @@ public class MiniWindows extends javax.swing.JFrame {
                         .addComponent(jButton5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tbt_b)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,6 +271,11 @@ public class MiniWindows extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
+        jep_texto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jep_textoMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jep_texto);
 
         javax.swing.GroupLayout jd_editorTextoLayout = new javax.swing.GroupLayout(jd_editorTexto.getContentPane());
@@ -265,7 +284,7 @@ public class MiniWindows extends javax.swing.JFrame {
             jd_editorTextoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jd_editorTextoLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(16, 16, 16)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -517,7 +536,35 @@ public class MiniWindows extends javax.swing.JFrame {
             .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        jmi_ppm_desktop_bg.setText("Cambiar Background");
+        jmi_ppm_desktop_bg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_ppm_desktop_bgActionPerformed(evt);
+            }
+        });
+        ppm_desktop.add(jmi_ppm_desktop_bg);
+
+        jmi_ppm_copy.setText("Copiar");
+        ppm_editor.add(jmi_ppm_copy);
+
+        jmi_ppm_cut.setText("Cortar");
+        ppm_editor.add(jmi_ppm_cut);
+
+        jmi_ppm_paste.setText("Pegar");
+        ppm_editor.add(jmi_ppm_paste);
+        ppm_editor.add(jSeparator2);
+
+        jmi_ppm_select.setText("Seleccionar");
+        ppm_editor.add(jmi_ppm_select);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jToolBar1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar1.setRollover(true);
@@ -657,22 +704,11 @@ public class MiniWindows extends javax.swing.JFrame {
         });
         jToolBar1.add(jl_tb_netbeens);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(964, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
-        );
+        jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 54, 56, 433));
+
+        jlb_bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bg/bg_3.jpg"))); // NOI18N
+        jlb_bg.setPreferredSize(new java.awt.Dimension(1450, 1100));
+        jPanel1.add(jlb_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jm_start.setText("Start");
 
@@ -1125,6 +1161,32 @@ public class MiniWindows extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tbt_bMouseClicked
 
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        if(evt.isMetaDown()){
+            ppm_desktop.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jPanel1MouseClicked
+
+    private void jmi_ppm_desktop_bgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_ppm_desktop_bgActionPerformed
+        JFileChooser fc =new JFileChooser("./src/img/bg");
+        FileFilter filtro = new FileNameExtensionFilter("Imagenes", "jpg","png","jpeg","gif");
+        fc.setFileFilter(filtro);
+        File archivo;
+        int op = fc.showOpenDialog(this);
+        if (op == JFileChooser.APPROVE_OPTION){
+            archivo = fc.getSelectedFile();
+            Image img = Toolkit.getDefaultToolkit().createImage(archivo.getPath()).getScaledInstance(1450, 1100, 0);
+            this.jlb_bg.setIcon(new ImageIcon(img));
+        }
+    }//GEN-LAST:event_jmi_ppm_desktop_bgActionPerformed
+
+    private void jep_textoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jep_textoMouseClicked
+        if(evt.isMetaDown()){
+            ppm_editor.show(evt.getComponent(), evt.getX(), evt.getY());
+                    
+        }
+    }//GEN-LAST:event_jep_textoMouseClicked
+
     public void login() {
         jd_login.pack();
         jd_login.setModal(true);
@@ -1257,6 +1319,7 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JDialog jd_admin_users;
@@ -1280,12 +1343,20 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JLabel jl_tb_player;
     private javax.swing.JLabel jl_tb_socialnet;
     private javax.swing.JLabel jl_tb_text;
+    private javax.swing.JLabel jlb_bg;
     private javax.swing.JMenu jm_admin;
     private javax.swing.JMenu jm_start;
     private javax.swing.JMenuItem jmi_admin_users;
     private javax.swing.JMenuItem jmi_login;
     private javax.swing.JMenuItem jmi_logout;
+    private javax.swing.JMenuItem jmi_ppm_copy;
+    private javax.swing.JMenuItem jmi_ppm_cut;
+    private javax.swing.JMenuItem jmi_ppm_desktop_bg;
+    private javax.swing.JMenuItem jmi_ppm_paste;
+    private javax.swing.JMenuItem jmi_ppm_select;
     private javax.swing.JTree jtree1;
+    private javax.swing.JPopupMenu ppm_desktop;
+    private javax.swing.JPopupMenu ppm_editor;
     private javax.swing.JToggleButton tbt_b;
     private javax.swing.JPasswordField tf_admin_agregar_password;
     private javax.swing.JTextField tf_admin_agregar_user;
