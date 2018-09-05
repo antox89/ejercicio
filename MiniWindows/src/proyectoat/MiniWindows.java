@@ -67,6 +67,15 @@ public class MiniWindows extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jep_texto = new javax.swing.JTextPane();
         jd_visorImagenes = new javax.swing.JDialog();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jlb_visor_pic = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
         jd_agenda = new javax.swing.JDialog();
         jPanel3 = new javax.swing.JPanel();
         jd_shell = new javax.swing.JDialog();
@@ -82,11 +91,11 @@ public class MiniWindows extends javax.swing.JFrame {
         jTree1 = new javax.swing.JTree();
         jLabel7 = new javax.swing.JLabel();
         tf_msg_para = new javax.swing.JTextField();
+        bt_msg_select = new javax.swing.JButton();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
         jd_redSocial = new javax.swing.JDialog();
         jd_netbeens = new javax.swing.JDialog();
         jd_login = new javax.swing.JDialog();
@@ -114,6 +123,8 @@ public class MiniWindows extends javax.swing.JFrame {
         jmi_ppm_paste = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jmi_ppm_select = new javax.swing.JMenuItem();
+        ppm_chat = new javax.swing.JPopupMenu();
+        jmi_ppm_chat = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         jl_tb_explorer = new javax.swing.JLabel();
@@ -314,15 +325,78 @@ public class MiniWindows extends javax.swing.JFrame {
 
         jd_visorImagenes.setTitle("Imágenes");
 
+        jPanel10.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addComponent(jlb_visor_pic)
+                .addGap(0, 735, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addComponent(jlb_visor_pic)
+                .addGap(0, 352, Short.MAX_VALUE))
+        );
+
+        jButton7.setText("<<");
+
+        jButton8.setText(">>");
+
+        jButton9.setText("Seleccionar...");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(jButton7)
+                        .addGap(35, 35, 35)
+                        .addComponent(jButton8)
+                        .addGap(34, 34, 34)
+                        .addComponent(jButton9)))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton7)
+                    .addComponent(jButton8)
+                    .addComponent(jButton9))
+                .addContainerGap(51, Short.MAX_VALUE))
+        );
+
+        jMenu2.setText("File");
+        jMenuBar3.add(jMenu2);
+
+        jMenu3.setText("Edit");
+        jMenuBar3.add(jMenu3);
+
+        jd_visorImagenes.setJMenuBar(jMenuBar3);
+
         javax.swing.GroupLayout jd_visorImagenesLayout = new javax.swing.GroupLayout(jd_visorImagenes.getContentPane());
         jd_visorImagenes.getContentPane().setLayout(jd_visorImagenesLayout);
         jd_visorImagenesLayout.setHorizontalGroup(
             jd_visorImagenesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jd_visorImagenesLayout.setVerticalGroup(
             jd_visorImagenesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jd_agenda.setTitle("Agenda");
@@ -389,9 +463,16 @@ public class MiniWindows extends javax.swing.JFrame {
 
         treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Usuarios");
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTree1MouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(jTree1);
 
         jLabel7.setText("Para:");
+
+        bt_msg_select.setText("Seleccionar...");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -400,32 +481,36 @@ public class MiniWindows extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bt_msg_send, javax.swing.GroupLayout.Alignment.TRAILING))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tf_msg_para))
-                    .addComponent(bt_msg_send, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                        .addComponent(tf_msg_para)
+                        .addGap(18, 18, 18)
+                        .addComponent(bt_msg_select)))
+                .addGap(40, 40, 40)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(tf_msg_para, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tf_msg_para, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bt_msg_select))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(bt_msg_send)
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -442,9 +527,6 @@ public class MiniWindows extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu1);
 
-        jMenu2.setText("Edit");
-        jMenuBar2.add(jMenu2);
-
         jd_messenger.setJMenuBar(jMenuBar2);
 
         javax.swing.GroupLayout jd_messengerLayout = new javax.swing.GroupLayout(jd_messenger.getContentPane());
@@ -457,7 +539,7 @@ public class MiniWindows extends javax.swing.JFrame {
             jd_messengerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_messengerLayout.createSequentialGroup()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jd_redSocial.setTitle("SocialNet");
@@ -647,6 +729,9 @@ public class MiniWindows extends javax.swing.JFrame {
         jmi_ppm_select.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/24x24_select.png"))); // NOI18N
         jmi_ppm_select.setText("Seleccionar");
         ppm_editor.add(jmi_ppm_select);
+
+        jmi_ppm_chat.setText("Chat");
+        ppm_chat.add(jmi_ppm_chat);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1278,6 +1363,12 @@ public class MiniWindows extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jep_textoMouseClicked
 
+    private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
+        if(evt.isMetaDown()){
+            ppm_chat.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jTree1MouseClicked
+
     public void login() {
         jd_login.pack();
         jd_login.setModal(true);
@@ -1384,6 +1475,7 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JButton bt_admin_agregar_crearUsuario;
     private javax.swing.JButton bt_login_in;
     private javax.swing.JButton bt_login_xl;
+    private javax.swing.JButton bt_msg_select;
     private javax.swing.JButton bt_msg_send;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -1391,6 +1483,9 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -1401,12 +1496,15 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1414,6 +1512,7 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1447,17 +1546,20 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JLabel jl_tb_socialnet;
     private javax.swing.JLabel jl_tb_text;
     private javax.swing.JLabel jlb_bg;
+    private javax.swing.JLabel jlb_visor_pic;
     private javax.swing.JMenu jm_admin;
     private javax.swing.JMenu jm_start;
     private javax.swing.JMenuItem jmi_admin_users;
     private javax.swing.JMenuItem jmi_login;
     private javax.swing.JMenuItem jmi_logout;
+    private javax.swing.JMenuItem jmi_ppm_chat;
     private javax.swing.JMenuItem jmi_ppm_copy;
     private javax.swing.JMenuItem jmi_ppm_cut;
     private javax.swing.JMenuItem jmi_ppm_desktop_bg;
     private javax.swing.JMenuItem jmi_ppm_paste;
     private javax.swing.JMenuItem jmi_ppm_select;
     private javax.swing.JTree jtree1;
+    private javax.swing.JPopupMenu ppm_chat;
     private javax.swing.JPopupMenu ppm_desktop;
     private javax.swing.JPopupMenu ppm_editor;
     private javax.swing.JTextArea ta_msg_chat;
