@@ -3,6 +3,7 @@ package proyectoat;
 import java.io.File;
 import javax.swing.JOptionPane;
 import filesystem.*;
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -15,7 +16,13 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -41,6 +48,19 @@ public class MiniWindows extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tree2 = new javax.swing.JTree();
         jd_editorTexto = new javax.swing.JDialog();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        tbt_b = new javax.swing.JToggleButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jep_texto = new javax.swing.JTextPane();
         jd_visorImagenes = new javax.swing.JDialog();
         jd_agenda = new javax.swing.JDialog();
         jPanel3 = new javax.swing.JPanel();
@@ -142,15 +162,120 @@ public class MiniWindows extends javax.swing.JFrame {
 
         jd_editorTexto.setTitle("Editor de Texto");
 
+        jLabel5.setText("Formato:");
+
+        jButton1.setText("B");
+
+        jButton2.setText("I");
+
+        jButton3.setText("U");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "12 pt", "14 pt", "18 pt", "24 pt", "30 pt" }));
+
+        jLabel6.setText("Tamaño:");
+
+        jButton4.setText("Color");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+
+        jButton5.setText("Sombra");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
+
+        jButton6.setText("HTML");
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
+
+        tbt_b.setText("B");
+        tbt_b.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbt_bMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3))
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(49, 49, 49)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jButton4)
+                        .addGap(31, 31, 31)
+                        .addComponent(jButton6))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tbt_b)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4)
+                    .addComponent(jButton6))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addComponent(jButton5))
+                        .addContainerGap(33, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tbt_b)
+                        .addContainerGap())))
+        );
+
+        jScrollPane3.setViewportView(jep_texto);
+
         javax.swing.GroupLayout jd_editorTextoLayout = new javax.swing.GroupLayout(jd_editorTexto.getContentPane());
         jd_editorTexto.getContentPane().setLayout(jd_editorTextoLayout);
         jd_editorTextoLayout.setHorizontalGroup(
             jd_editorTextoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jd_editorTextoLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jd_editorTextoLayout.setVerticalGroup(
             jd_editorTextoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_editorTextoLayout.createSequentialGroup()
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         jd_visorImagenes.setTitle("Imágenes");
@@ -616,13 +741,13 @@ public class MiniWindows extends javax.swing.JFrame {
         //jf.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         //int s = jf.showOpenDialog(this);
         
-        File f = new File("./Z");
+        File f = new File("./Z/Usuarios");
         
         //File f = jf.getSelectedFile();
         
         modelo1.setRoot(new DefaultMutableTreeNode(f.getName()));
-        //listarTodo(f, (DefaultMutableTreeNode)modelo1.getRoot());
-        listar_no_orden(f, (DefaultMutableTreeNode)modelo1.getRoot());
+        listarTodo(f, (DefaultMutableTreeNode)modelo1.getRoot());
+        //listar_no_orden(f, (DefaultMutableTreeNode)modelo1.getRoot());
     }//GEN-LAST:event_jl_tb_explorerMouseClicked
 
     public void listar_no_orden(File p_raiz, DefaultMutableTreeNode nodo){
@@ -665,7 +790,7 @@ public class MiniWindows extends javax.swing.JFrame {
                 }else{
                     DefaultMutableTreeNode n = new DefaultMutableTreeNode(temp.getName());
                     nodo.add(n);
-                    listarTodo(raiz, n);
+                    listarTodo(temp, n);
                 }
             }
             
@@ -777,6 +902,7 @@ public class MiniWindows extends javax.swing.JFrame {
 
     private void jl_tb_textMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_tb_textMouseClicked
         mostrarTextEdit();
+        
     }//GEN-LAST:event_jl_tb_textMouseClicked
 
     private void jmi_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_loginActionPerformed
@@ -929,6 +1055,76 @@ public class MiniWindows extends javax.swing.JFrame {
 
     }//GEN-LAST:event_bt_admin_agregar_crearUsuarioMouseClicked
 
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        try {
+            Highlighter h1 = jep_texto.getHighlighter();
+            Highlighter.HighlightPainter sombreador;
+            
+            Color c = JColorChooser.showDialog(this, "Color?", Color.yellow);
+
+            sombreador = new DefaultHighlighter.DefaultHighlightPainter(c);
+            //DefaultHighlightPainter(Color.YELLOW);
+
+            h1.addHighlight(jep_texto.getSelectionStart(),//devuelve desde donde tengo marcado el texto hasta donde termina
+                    jep_texto.getSelectionEnd(), sombreador);
+        } catch (Exception ex) {
+
+        }
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        //obtener estilo actual
+        StyledDocument doc = jep_texto.getStyledDocument();
+
+        //hacer mi estilo
+        Style estilo = jep_texto.addStyle("miEstilo", null);
+        StyleConstants.setForeground(estilo, Color.red);
+        StyleConstants.setUnderline(estilo, true);
+        StyleConstants.setFontSize(estilo, 24);
+        StyleConstants.setBold(estilo, true);
+        StyleConstants.setItalic(estilo, true);
+
+        //colorear una selección del textPane
+        doc.setCharacterAttributes(jep_texto.getSelectionStart(),
+                jep_texto.getSelectionEnd()
+                - jep_texto.getSelectionStart(),
+                jep_texto.getStyle("miEstilo"), true);
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        jep_texto.setContentType("text/html");
+        jep_texto.setText("<h1>Encabezado 1 </h1>"
+                + "<h2>Tipo 2</h2>"
+                + "<b>Texto negrita</b><br>"
+                + "<i>Texto cursiva</i><br>"
+                + "<u>Texto subrayado</u><br>");
+    }//GEN-LAST:event_jButton6MouseClicked
+
+    private void tbt_bMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbt_bMouseClicked
+        
+        if(tbt_b.isSelected()){
+            //obtener estilo actual
+        StyledDocument doc = jep_texto.getStyledDocument();
+
+        //hacer mi estilo
+        Style estilo = jep_texto.addStyle("miEstilo", null);
+        StyleConstants.setForeground(estilo, Color.red);
+        StyleConstants.setUnderline(estilo, true);
+        StyleConstants.setFontSize(estilo, 24);
+        StyleConstants.setBold(estilo, true);
+        StyleConstants.setItalic(estilo, true);
+
+        //colorear una selección del textPane
+        doc.setCharacterAttributes(jep_texto.getSelectionStart(),
+                jep_texto.getSelectionEnd()
+                - jep_texto.getSelectionStart(),
+                jep_texto.getStyle("miEstilo"), true);
+        }else{
+            System.out.println("sd");
+        }
+        
+    }//GEN-LAST:event_tbt_bMouseClicked
+
     public void login() {
         jd_login.pack();
         jd_login.setModal(true);
@@ -1035,10 +1231,19 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JButton bt_admin_agregar_crearUsuario;
     private javax.swing.JButton bt_login_in;
     private javax.swing.JButton bt_login_xl;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
@@ -1047,8 +1252,10 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
@@ -1063,6 +1270,7 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JDialog jd_reproductor;
     private javax.swing.JDialog jd_shell;
     private javax.swing.JDialog jd_visorImagenes;
+    private javax.swing.JTextPane jep_texto;
     private javax.swing.JLabel jl_tb_agenda;
     private javax.swing.JLabel jl_tb_cmd;
     private javax.swing.JLabel jl_tb_explorer;
@@ -1078,6 +1286,7 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmi_login;
     private javax.swing.JMenuItem jmi_logout;
     private javax.swing.JTree jtree1;
+    private javax.swing.JToggleButton tbt_b;
     private javax.swing.JPasswordField tf_admin_agregar_password;
     private javax.swing.JTextField tf_admin_agregar_user;
     private javax.swing.JPasswordField tf_login_password;
