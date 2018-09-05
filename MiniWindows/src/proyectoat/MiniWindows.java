@@ -617,12 +617,31 @@ public class MiniWindows extends javax.swing.JFrame {
         //int s = jf.showOpenDialog(this);
         
         File f = new File("./Z");
+        
         //File f = jf.getSelectedFile();
         
         modelo1.setRoot(new DefaultMutableTreeNode(f.getName()));
-        listarTodo(f, (DefaultMutableTreeNode)modelo1.getRoot());
+        //listarTodo(f, (DefaultMutableTreeNode)modelo1.getRoot());
+        listar_no_orden(f, (DefaultMutableTreeNode)modelo1.getRoot());
     }//GEN-LAST:event_jl_tb_explorerMouseClicked
 
+    public void listar_no_orden(File p_raiz, DefaultMutableTreeNode nodo){
+        try{
+            for (File temp : p_raiz.listFiles()) {
+                if(temp.isFile()){
+                    DefaultMutableTreeNode n = new DefaultMutableTreeNode(temp.getName());
+                    nodo.add(n);
+                }else{
+                    DefaultMutableTreeNode n = new DefaultMutableTreeNode(temp.getName());
+                    nodo.add(n);
+                    listar_no_orden(temp, n);
+                }
+            }
+        }catch(Exception e){
+            
+        }
+    }
+    
     public void listarTodo(File raiz, DefaultMutableTreeNode nodo){
         try{
             ArrayList<File> fl1= new ArrayList();
