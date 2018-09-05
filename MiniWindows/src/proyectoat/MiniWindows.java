@@ -2,16 +2,26 @@ package proyectoat;
 
 import java.io.File;
 import javax.swing.JOptionPane;
+import filesystem.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.StringTokenizer;
 
 public class MiniWindows extends javax.swing.JFrame {
 
     public MiniWindows() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setExtendedState(MAXIMIZED_BOTH);
+        //this.setExtendedState(MAXIMIZED_BOTH);
 
         jmi_logout.setEnabled(false);
-        jm_admin.setVisible(false);
+        //jm_admin.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -36,6 +46,15 @@ public class MiniWindows extends javax.swing.JFrame {
         bt_login_in = new javax.swing.JButton();
         bt_login_xl = new javax.swing.JButton();
         tf_login_password = new javax.swing.JPasswordField();
+        jd_admin_users = new javax.swing.JDialog();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        tf_admin_agregar_user = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        tf_admin_agregar_password = new javax.swing.JPasswordField();
+        bt_admin_agregar_crearUsuario = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         jl_tb_explorer = new javax.swing.JLabel();
@@ -54,6 +73,7 @@ public class MiniWindows extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem3 = new javax.swing.JMenuItem();
         jm_admin = new javax.swing.JMenu();
+        jmi_admin_users = new javax.swing.JMenuItem();
 
         jd_explorer.setTitle("Explorador");
 
@@ -248,6 +268,78 @@ public class MiniWindows extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        jLabel3.setText("Usuario:");
+
+        jLabel4.setText("Password:");
+
+        bt_admin_agregar_crearUsuario.setText("Crear Usuario");
+        bt_admin_agregar_crearUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_admin_agregar_crearUsuarioMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(bt_admin_agregar_crearUsuario)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tf_admin_agregar_user, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                            .addComponent(tf_admin_agregar_password))
+                        .addGap(50, 50, 50)))
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(tf_admin_agregar_user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(tf_admin_agregar_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addComponent(bt_admin_agregar_crearUsuario)
+                .addGap(44, 44, 44))
+        );
+
+        jTabbedPane1.addTab("Agregar", jPanel4);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 425, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 230, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Ver", jPanel5);
+
+        javax.swing.GroupLayout jd_admin_usersLayout = new javax.swing.GroupLayout(jd_admin_users.getContentPane());
+        jd_admin_users.getContentPane().setLayout(jd_admin_usersLayout);
+        jd_admin_usersLayout.setHorizontalGroup(
+            jd_admin_usersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jd_admin_usersLayout.setVerticalGroup(
+            jd_admin_usersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jToolBar1.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -435,6 +527,15 @@ public class MiniWindows extends javax.swing.JFrame {
         jMenuBar1.add(jm_start);
 
         jm_admin.setText("Administración");
+
+        jmi_admin_users.setText("Usuarios");
+        jmi_admin_users.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_admin_usersActionPerformed(evt);
+            }
+        });
+        jm_admin.add(jmi_admin_users);
+
         jMenuBar1.add(jm_admin);
 
         setJMenuBar(jMenuBar1);
@@ -571,20 +672,19 @@ public class MiniWindows extends javax.swing.JFrame {
         if (tf_login_user.getText().equals(admin) && tf_login_password.getText().equals(password)) {
             File dir = new File("Z");
             jd_login.dispose();
-            
+
             if (dir.exists()) {
-                
-                JOptionPane.showMessageDialog(this, "Welcome!" + tf_login_user.getText());
-                
+
+                //JOptionPane.showMessageDialog(this, "Welcome!" + tf_login_user.getText());
 
             } else {
                 
                 dir.mkdir();
-                JOptionPane.showMessageDialog(this, "Welcome Administrator!");
-                
+                //JOptionPane.showMessageDialog(this, "Welcome Administrator!");
+
             }
 
-            jm_admin.setVisible(true);
+            //jm_admin.setVisible(true);
             tf_login_password.setText("");
             tf_login_user.setText("");
             jmi_login.setEnabled(false);
@@ -596,13 +696,12 @@ public class MiniWindows extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         int response = JOptionPane.showConfirmDialog(this, "¿Salir del sistema?", "Salir", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-        
         if (response == JOptionPane.OK_OPTION) {
-            
+
             if (jmi_login.isEnabled() == false) {
                 JOptionPane.showMessageDialog(this, "Primero termine la sesión de usuario");
 
-            }else{
+            } else {
                 System.exit(0);
             }
         }
@@ -612,11 +711,82 @@ public class MiniWindows extends javax.swing.JFrame {
         int response = JOptionPane.showConfirmDialog(this, "¿Cerrar sesión de Usuario?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (response == JOptionPane.OK_OPTION) {
-            jm_admin.setVisible(false);
+            //jm_admin.setVisible(false);
             jmi_login.setEnabled(true);
             jmi_logout.setEnabled(false);
         }
     }//GEN-LAST:event_jmi_logoutActionPerformed
+
+    private void jmi_admin_usersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_admin_usersActionPerformed
+        jd_admin_users.pack();
+        jd_admin_users.setModal(true);
+        jd_admin_users.setLocationRelativeTo(this);
+        jd_admin_users.setVisible(true);
+    }//GEN-LAST:event_jmi_admin_usersActionPerformed
+
+    private void bt_admin_agregar_crearUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_admin_agregar_crearUsuarioMouseClicked
+
+        String usuario, password;
+        try {
+            usuario = tf_admin_agregar_user.getText();
+            password = tf_admin_agregar_password.getText();
+
+            Usuario u = new Usuario(usuario, password);
+            adminUsuario ap = new adminUsuario("./usuarios.txt");
+            ap.agregarUsuario(u);
+            ap.escribirUsuarioT();
+
+            //adminUsuario ad = new adminUsuario();
+            //ad.registrarUsuario(usuario, password);
+            adminDirectorio d = new adminDirectorio();
+            d.crearDirectorioUsuario(usuario);
+
+            try {
+                System.out.println("Holaaaaaaaa");
+                BufferedReader input = new BufferedReader(new FileReader("passwords.txt"));
+                String line = input.readLine();
+                System.out.println("holaaaaaa");
+                while (line != null) {
+                    StringTokenizer st = new StringTokenizer(line);
+                    if (tf_admin_agregar_user.getText().equals(st.nextToken())) {
+                        System.out.println("User already exists");
+                        break;
+                    }
+                    line = input.readLine();
+                }
+
+                input.close();
+
+                MessageDigest md = MessageDigest.getInstance("SHA-256");
+                md.update(tf_admin_agregar_password.getText().getBytes());
+                byte byteData[] = md.digest();
+                StringBuffer sb = new StringBuffer();
+
+                for (int i = 0; i < byteData.length; i++) {
+                    sb.append(Integer.toString((byteData[i] & 0xFF) + 0x100, 16).substring(1));
+                }
+
+                BufferedWriter output = new BufferedWriter(new FileWriter("passwords.txt", true));
+
+                output.write(tf_admin_agregar_user.getText() + " " + sb.toString() + "\n");
+                output.close();
+
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (NoSuchAlgorithmException ex) {
+                ex.printStackTrace();
+            }
+
+            tf_admin_agregar_user.setText("");
+            tf_admin_agregar_password.setText("");
+
+        } catch (Exception e) {
+
+        }
+
+    }//GEN-LAST:event_bt_admin_agregar_crearUsuarioMouseClicked
 
     public void login() {
         jd_login.pack();
@@ -721,17 +891,24 @@ public class MiniWindows extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_admin_agregar_crearUsuario;
     private javax.swing.JButton bt_login_in;
     private javax.swing.JButton bt_login_xl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JDialog jd_admin_users;
     private javax.swing.JDialog jd_agenda;
     private javax.swing.JDialog jd_editorTexto;
     private javax.swing.JDialog jd_explorer;
@@ -753,8 +930,11 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JLabel jl_tb_text;
     private javax.swing.JMenu jm_admin;
     private javax.swing.JMenu jm_start;
+    private javax.swing.JMenuItem jmi_admin_users;
     private javax.swing.JMenuItem jmi_login;
     private javax.swing.JMenuItem jmi_logout;
+    private javax.swing.JPasswordField tf_admin_agregar_password;
+    private javax.swing.JTextField tf_admin_agregar_user;
     private javax.swing.JPasswordField tf_login_password;
     private javax.swing.JTextField tf_login_user;
     // End of variables declaration//GEN-END:variables
