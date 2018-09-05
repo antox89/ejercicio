@@ -667,16 +667,25 @@
       <SubComponents>
         <MenuItem class="javax.swing.JMenuItem" name="jmi_ppm_copy">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/24x24_copy.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Copiar"/>
           </Properties>
         </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="jmi_ppm_cut">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/24x24_cut.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Cortar"/>
           </Properties>
         </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="jmi_ppm_paste">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/24x24_paste.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Pegar"/>
           </Properties>
         </MenuItem>

@@ -544,12 +544,15 @@ public class MiniWindows extends javax.swing.JFrame {
         });
         ppm_desktop.add(jmi_ppm_desktop_bg);
 
+        jmi_ppm_copy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/24x24_copy.png"))); // NOI18N
         jmi_ppm_copy.setText("Copiar");
         ppm_editor.add(jmi_ppm_copy);
 
+        jmi_ppm_cut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/24x24_cut.png"))); // NOI18N
         jmi_ppm_cut.setText("Cortar");
         ppm_editor.add(jmi_ppm_cut);
 
+        jmi_ppm_paste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/24x24_paste.png"))); // NOI18N
         jmi_ppm_paste.setText("Pegar");
         ppm_editor.add(jmi_ppm_paste);
         ppm_editor.add(jSeparator2);
