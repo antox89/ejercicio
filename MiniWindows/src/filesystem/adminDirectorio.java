@@ -50,13 +50,13 @@ public class adminDirectorio {
     public void crearDirectorioUsuario(String dir){
         File directorio,docs,pics,music,calendario,msj,correo;
         
-        directorio = new File("./Z/"+dir);
-        docs = new File("./Z/"+dir+"/Documentos");
-        pics = new File("./Z/"+dir+"/Pictures");
-        music = new File("./Z/"+dir+"/Music");
-        calendario = new File("./Z/"+dir+"/Calendario");
-        msj = new File("./Z/"+dir+"/Mensajes");
-        correo = new File("./Z/"+dir+"/Correo");
+        directorio = new File("./Z/Usuarios/"+dir);
+        docs = new File("./Z/Usuarios/"+dir+"/Documentos");
+        pics = new File("./Z/Usuarios/"+dir+"/Pictures");
+        music = new File("./Z/Usuarios/"+dir+"/Music");
+        calendario = new File("./Z/Usuarios/"+dir+"/Calendario");
+        msj = new File("./Z/Usuarios/"+dir+"/Mensajes");
+        correo = new File("./Z/Usuarios/"+dir+"/Correo");
         
         directorio.mkdir();
         docs.mkdir();
