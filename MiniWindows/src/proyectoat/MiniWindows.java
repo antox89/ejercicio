@@ -30,6 +30,9 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import messenger.Mensaje;
+import messenger.UsuarioMsj;
+import messenger.adminUsuariosMsj;
 
 public class MiniWindows extends javax.swing.JFrame {
 
@@ -638,6 +641,11 @@ public class MiniWindows extends javax.swing.JFrame {
         jScrollPane5.setViewportView(ta_msg_txt);
 
         bt_msg_send.setText("Enviar");
+        bt_msg_send.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_msg_sendMouseClicked(evt);
+            }
+        });
 
         treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Usuarios");
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -1546,6 +1554,30 @@ public class MiniWindows extends javax.swing.JFrame {
             ppm_chat.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_jTree1MouseClicked
+
+    private void bt_msg_sendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_msg_sendMouseClicked
+        adminUsuariosMsj au = new adminUsuariosMsj("./mensajes.txt");
+        
+        String textoEnviar = ta_msg_txt.getText();
+        
+        UsuarioMsj ums = new UsuarioMsj("NombreUsuario1", "ApellidoUsuario1", "user01", "pwd-usr1");
+        Mensaje m1 = new Mensaje("From:user01", "To:paraVos", "Subject", textoEnviar);
+        Mensaje m2 = new Mensaje("From:user01", "To:OtroUser", "Asunto", "Este es un mensaje de texto");
+        ums.agregarMensaje(m1);
+        ums.agregarMensaje(m2);
+        au.agregarUsuarioMsj(ums);
+        try {
+            au.escribirMensaje();
+            ta_msg_chat.append("user01"+":"+textoEnviar+"\n");
+            //JOptionPane.showMessageDialog(jd_messenger,"Mensaje envíado");
+            ta_msg_txt.setText("");
+        } catch (IOException ex) {
+            
+        }
+        
+        //au.leerMensaje();
+        System.out.println(au.getListaUsuariosMsj().get(0).getApellido());
+    }//GEN-LAST:event_bt_msg_sendMouseClicked
 
     public void login() {
         jd_login.pack();

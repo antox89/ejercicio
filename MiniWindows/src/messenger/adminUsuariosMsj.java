@@ -49,7 +49,7 @@ public class adminUsuariosMsj {
         FileWriter fw = null;
         BufferedWriter bw= null;
         try{
-            fw = new FileWriter("./mensajes.txt",true);
+            fw = new FileWriter(archivo,true);
             bw= new BufferedWriter(fw);
             for (UsuarioMsj usuario : listaUsuariosMsj) {
                 bw.write(usuario.getUsuario()+";");
