@@ -9,19 +9,19 @@ import proyectoat.Usuario;
 public class UsuarioMsj extends Usuario{
 
     private ArrayList<Mensaje> listaMensajes = new ArrayList();
+    private ArrayList<Mensaje> enviado = new ArrayList();
+    private ArrayList<Mensaje> recibido = new ArrayList();
     private String nombre, apellido;
 
     public UsuarioMsj() {
         super();
     }
 
-    public UsuarioMsj(String nombre, String apellido, String usuario, String password) {
-        super(usuario, password);
+    public UsuarioMsj(String nombre, String apellido, String usuario) {
+        super(usuario);
         this.nombre = nombre;
         this.apellido = apellido;
     }
-    
-    
 
     public ArrayList<Mensaje> getListaMensajes() {
         return listaMensajes;
@@ -52,6 +52,12 @@ public class UsuarioMsj extends Usuario{
         this.listaMensajes.add(m);
     }
     
+    public void enviarMensaje(Mensaje m){
+        this.listaMensajes.add(m);
+    }
     
+    public void recibirMensaje(Mensaje m){
+        this.listaMensajes.add(m);
+    }
     
 }

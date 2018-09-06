@@ -1560,10 +1560,17 @@ public class MiniWindows extends javax.swing.JFrame {
         
         String textoEnviar = ta_msg_txt.getText();
         
-        UsuarioMsj ums = new UsuarioMsj("NombreUsuario1", "ApellidoUsuario1", "user01", "pwd-usr1");
-        Mensaje m1 = new Mensaje("From:user01", "To:paraVos", textoEnviar);
-        ums.agregarMensaje(m1);
-        au.agregarUsuarioMsj(ums);
+        UsuarioMsj ums1 = new UsuarioMsj("User1", "Apellido", "user01");
+        UsuarioMsj ums2 = new UsuarioMsj("Usuario2", "LastName", "uzer02");
+        
+        Mensaje m1 = new Mensaje(ums1.getNombre(), ums2.getNombre(), textoEnviar);
+        //Agregar el mismo mensaje ambos contactos
+        ums1.agregarMensaje(m1);
+        ums2.agregarMensaje(m1);
+        
+        au.agregarUsuarioMsj(ums1);
+        au.agregarUsuarioMsj(ums2);
+        
         try {
             
             au.escribirMensaje();
