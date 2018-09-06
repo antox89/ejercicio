@@ -91,7 +91,7 @@ public class adminUsuariosMsj {
                     ArrayList<Mensaje> temp = new ArrayList();
                     Mensaje mt = new Mensaje();
                     
-                    mt.setEmisor(receptor);
+                    mt.setEmisor(usuario);
                     mt.setReceptor(receptor);
                     mt.setMensaje(mensaje);
                     

@@ -1,0 +1,1 @@
+user01;user01,uzer02,Hola, soy el primer mensaje para el usuario.,;Apellido;uzer02;user01,uzer02,Hola, soy el primer mensaje para el usuario.,;LastName;user01;user01,uzer02,Soy otro mensaje,;Apellido;uzer02;user01,uzer02,Soy otro mensaje,;LastName;user01;user01,uzer02,Hi!!!,;Apellido;uzer02;user01,uzer02,Hi!!!,;LastName;
