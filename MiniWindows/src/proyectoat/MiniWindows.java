@@ -691,10 +691,10 @@ public class MiniWindows extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(tf_msg_para, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(bt_msg_select))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(bt_msg_send)
@@ -1561,18 +1561,18 @@ public class MiniWindows extends javax.swing.JFrame {
         String textoEnviar = ta_msg_txt.getText();
         
         UsuarioMsj ums = new UsuarioMsj("NombreUsuario1", "ApellidoUsuario1", "user01", "pwd-usr1");
-        Mensaje m1 = new Mensaje("From:user01", "To:paraVos", "Subject", textoEnviar);
-        Mensaje m2 = new Mensaje("From:user01", "To:OtroUser", "Asunto", "Este es un mensaje de texto");
+        Mensaje m1 = new Mensaje("From:user01", "To:paraVos", textoEnviar);
         ums.agregarMensaje(m1);
-        ums.agregarMensaje(m2);
         au.agregarUsuarioMsj(ums);
         try {
+            
             au.escribirMensaje();
             ta_msg_chat.append("user01"+":"+textoEnviar+"\n");
             //JOptionPane.showMessageDialog(jd_messenger,"Mensaje envíado");
             ta_msg_txt.setText("");
-        } catch (IOException ex) {
             
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
         
         //au.leerMensaje();

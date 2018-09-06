@@ -5,15 +5,14 @@ package messenger;
 
 public class Mensaje {
     
-    private String emisor, receptor, asunto, mensaje;
+    private String emisor, receptor, mensaje;
 
     public Mensaje() {
     }
 
-    public Mensaje(String emisor, String receptor, String asunto, String mensaje) {
+    public Mensaje(String emisor, String receptor, String mensaje) {
         this.emisor = emisor;
         this.receptor = receptor;
-        this.asunto = asunto;
         this.mensaje = mensaje;
     }
 
@@ -33,14 +32,6 @@ public class Mensaje {
         this.receptor = receptor;
     }
 
-    public String getAsunto() {
-        return asunto;
-    }
-
-    public void setAsunto(String asunto) {
-        this.asunto = asunto;
-    }
-
     public String getMensaje() {
         return mensaje;
     }
@@ -51,7 +42,7 @@ public class Mensaje {
 
     @Override
     public String toString() {
-        return "Mensaje{" + "emisor=" + emisor + ", receptor=" + receptor + ", asunto=" + asunto + ", mensaje=" + mensaje + '}';
+        return "Mensaje{" + "emisor=" + emisor + ", receptor=" + receptor + ", mensaje=" + mensaje + '}';
     }
     
     

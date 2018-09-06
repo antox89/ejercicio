@@ -57,7 +57,6 @@ public class adminUsuariosMsj {
                 for (Mensaje m : usuario.getListaMensajes()) {
                     bw.write(m.getEmisor()+",");
                     bw.write(m.getReceptor()+",");
-                    bw.write(m.getAsunto()+",");
                     bw.write(m.getMensaje()+",");
                 }
                 bw.write(";");
@@ -83,11 +82,10 @@ public class adminUsuariosMsj {
                 
                 while(sc.hasNext()){
                     String usuario, apellido;
-                    String receptor,asunto,mensaje;
+                    String receptor,mensaje;
                     
                     usuario = sc.next();
                     receptor = sc.next();
-                    asunto = sc.next();
                     mensaje = sc.next();
                     
                     ArrayList<Mensaje> temp = new ArrayList();
@@ -95,7 +93,6 @@ public class adminUsuariosMsj {
                     
                     mt.setEmisor(receptor);
                     mt.setReceptor(receptor);
-                    mt.setAsunto(asunto);
                     mt.setMensaje(mensaje);
                     
                     Scanner s2 = new Scanner(sc.next());

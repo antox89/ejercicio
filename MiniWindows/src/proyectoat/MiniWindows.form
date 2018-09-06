@@ -770,10 +770,10 @@
                                   <Component id="tf_msg_para" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="bt_msg_select" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jScrollPane4" min="-2" pref="173" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jScrollPane4" min="-2" pref="175" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="jScrollPane5" min="-2" pref="84" max="-2" attributes="0"/>
+                              <Component id="jScrollPane5" min="-2" pref="101" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane6" min="-2" pref="319" max="-2" attributes="0"/>
                       </Group>
