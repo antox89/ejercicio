@@ -56,6 +56,17 @@ public class adminUsuario {
         this.listaUsuarios.add(u);
     }
     
+    
+    
+    public boolean validarUsuario(String usuario, String password){
+        for (Usuario us : listaUsuarios) {
+            if(us.getUsuario().equals(usuario) && us.getPassword().equals(password)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public void escribirUsuarioT() throws IOException{
         
         FileWriter fw = null;
