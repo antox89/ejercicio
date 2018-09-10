@@ -56,6 +56,26 @@ public class adminUsuario implements Serializable{
     public void agregarUsuario(Usuario u) {
         this.listaUsuarios.add(u);
     }
+    
+    public int posicionUsuario(String usuario){
+        int n = listaUsuarios.size();
+        for (int i = 0; i < n; i++) {
+            
+            if(listaUsuarios.get(i).getUsuario().equals(usuario)){
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    public boolean buscarUsuario(String usuario){
+        for (Usuario us : listaUsuarios) {
+            if (us.getUsuario().equals(usuario)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public boolean validarUsuario(String usuario, String password) {
         for (Usuario us : listaUsuarios) {

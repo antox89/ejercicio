@@ -38,6 +38,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
 import messenger.Mensaje;
 import messenger.UsuarioMsj;
 import messenger.adminUsuariosMsj;
@@ -161,13 +162,16 @@ public class MiniWindows extends javax.swing.JFrame {
         bt_signIn = new javax.swing.JButton();
         jd_admin_users = new javax.swing.JDialog();
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel5 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         tf_admin_agregar_user = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         tf_admin_agregar_password = new javax.swing.JPasswordField();
         bt_admin_agregar_crearUsuario = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        jtree_admin_users = new javax.swing.JTree();
+        bt_admin_cargar = new javax.swing.JButton();
         ppm_desktop = new javax.swing.JPopupMenu();
         jmi_ppm_desktop_bg = new javax.swing.JMenuItem();
         ppm_editor = new javax.swing.JPopupMenu();
@@ -1023,6 +1027,19 @@ public class MiniWindows extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 583, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 396, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Ver", jPanel5);
+
         jLabel3.setText("Usuario:");
 
         jLabel4.setText("Password:");
@@ -1037,6 +1054,17 @@ public class MiniWindows extends javax.swing.JFrame {
         bt_admin_agregar_crearUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bt_admin_agregar_crearUsuarioMouseClicked(evt);
+            }
+        });
+
+        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Usuarios");
+        jtree_admin_users.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane13.setViewportView(jtree_admin_users);
+
+        bt_admin_cargar.setText("Cargar");
+        bt_admin_cargar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_admin_cargarMouseClicked(evt);
             }
         });
 
@@ -1055,50 +1083,46 @@ public class MiniWindows extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tf_admin_agregar_user, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                            .addComponent(tf_admin_agregar_password))
-                        .addGap(50, 50, 50)))
-                .addContainerGap(48, Short.MAX_VALUE))
+                            .addComponent(tf_admin_agregar_password)))
+                    .addComponent(bt_admin_cargar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(tf_admin_agregar_user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tf_admin_agregar_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addComponent(bt_admin_agregar_crearUsuario)
-                .addGap(44, 44, 44))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(tf_admin_agregar_user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(tf_admin_agregar_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                        .addComponent(bt_admin_cargar)
+                        .addGap(52, 52, 52)
+                        .addComponent(bt_admin_agregar_crearUsuario)
+                        .addGap(107, 107, 107))))
         );
 
         jTabbedPane1.addTab("Agregar", jPanel4);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 425, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Ver", jPanel5);
 
         javax.swing.GroupLayout jd_admin_usersLayout = new javax.swing.GroupLayout(jd_admin_users.getContentPane());
         jd_admin_users.getContentPane().setLayout(jd_admin_usersLayout);
         jd_admin_usersLayout.setHorizontalGroup(
             jd_admin_usersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1)
         );
         jd_admin_usersLayout.setVerticalGroup(
             jd_admin_usersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1)
         );
 
         jmi_ppm_desktop_bg.setText("Cambiar Background");
@@ -1341,72 +1365,70 @@ public class MiniWindows extends javax.swing.JFrame {
 
     private void jl_tb_explorerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_tb_explorerMouseClicked
         mostrarFBI();
-        
-        DefaultTreeModel modelo1 = (DefaultTreeModel)jtree1.getModel();
-        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)modelo1.getRoot();
-        
+
+        DefaultTreeModel modelo1 = (DefaultTreeModel) jtree1.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelo1.getRoot();
+
         //JFileChooser jf = new JFileChooser("./");
         //jf.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         //int s = jf.showOpenDialog(this);
-        
         File f = new File("./Z/Usuarios");
-        
+
         //File f = jf.getSelectedFile();
-        
         modelo1.setRoot(new DefaultMutableTreeNode(f.getName()));
-        listarTodo(f, (DefaultMutableTreeNode)modelo1.getRoot());
+        listarTodo(f, (DefaultMutableTreeNode) modelo1.getRoot());
         //listar_no_orden(f, (DefaultMutableTreeNode)modelo1.getRoot());
     }//GEN-LAST:event_jl_tb_explorerMouseClicked
 
-    public void listar_no_orden(File p_raiz, DefaultMutableTreeNode nodo){
-        try{
+    public void listar_no_orden(File p_raiz, DefaultMutableTreeNode nodo) {
+        try {
             for (File temp : p_raiz.listFiles()) {
-                if(temp.isFile()){
+                if (temp.isFile()) {
                     DefaultMutableTreeNode n = new DefaultMutableTreeNode(temp.getName());
                     nodo.add(n);
-                }else{
+                } else {
                     DefaultMutableTreeNode n = new DefaultMutableTreeNode(temp.getName());
                     nodo.add(n);
                     listar_no_orden(temp, n);
                 }
             }
-        }catch(Exception e){
-            
+        } catch (Exception e) {
+
         }
     }
-    
-    public void listarTodo(File raiz, DefaultMutableTreeNode nodo){
-        try{
-            ArrayList<File> fl1= new ArrayList();
-            ArrayList<File> fl2= new ArrayList();
-            ArrayList<File> fl3= new ArrayList();
-            
+
+    public void listarTodo(File raiz, DefaultMutableTreeNode nodo) {
+        try {
+            ArrayList<File> fl1 = new ArrayList();
+            ArrayList<File> fl2 = new ArrayList();
+            ArrayList<File> fl3 = new ArrayList();
+
             for (File file : raiz.listFiles()) {
-                if(file.isDirectory()){
+                if (file.isDirectory()) {
                     fl1.add(file);
-                }else{
+                } else {
                     fl2.add(file);
                 }
             }
             fl3.addAll(fl1);
             fl3.addAll(fl2);
-            
+
             for (File temp : fl3) {
-                if(temp.isFile()){
+                if (temp.isFile()) {
                     DefaultMutableTreeNode n = new DefaultMutableTreeNode(temp.getName());
                     nodo.add(n);
-                }else{
+                } else {
                     DefaultMutableTreeNode n = new DefaultMutableTreeNode(temp.getName());
                     nodo.add(n);
                     listarTodo(temp, n);
                 }
             }
-            
-        }catch(Exception e){
-            
+
+        } catch (Exception e) {
+
         }
     }
-    
+
     private void jl_tb_explorerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_tb_explorerMouseEntered
         jl_tb_explorer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/48x48_explorer.png")));
     }//GEN-LAST:event_jl_tb_explorerMouseEntered
@@ -1510,7 +1532,7 @@ public class MiniWindows extends javax.swing.JFrame {
 
     private void jl_tb_textMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_tb_textMouseClicked
         mostrarTextEdit();
-        
+
     }//GEN-LAST:event_jl_tb_textMouseClicked
 
     private void jmi_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_loginActionPerformed
@@ -1521,30 +1543,29 @@ public class MiniWindows extends javax.swing.JFrame {
 
         //Admin ingresa por primera
         File dir = new File("Z");
-        File users = new File("./"+dir+"/Usuarios");
-        File system = new File("./"+dir+"/Sistema");
+        File users = new File("./" + dir + "/Usuarios");
+        File system = new File("./" + dir + "/Sistema");
         //reg = new FileWriter(system+"/passwords.txt");
-        
+
         if (tf_login_user.getText().equals(admin) && tf_login_password.getText().equals(password)) {
-            
+
             jd_login.dispose();
-            
+
             if (dir.exists()) {
-                
+
                 //JOptionPane.showMessageDialog(this, "Welcome!" + tf_login_user.getText());
-                
             } else {
-                
-                try{
-                    
+
+                try {
+
                     dir.mkdir();
                     users.mkdir();
                     system.mkdir();
-                    
+
                     FileWriter reg = null;
                     BufferedWriter bw = null;
-                    try{
-                        reg = new FileWriter(system+"/data.txt");
+                    try {
+                        reg = new FileWriter(system + "/data.txt");
                         bw = new BufferedWriter(reg);
                         bw.flush();
                     } catch (IOException ex) {
@@ -1555,21 +1576,21 @@ public class MiniWindows extends javax.swing.JFrame {
                     //reg.write("");
                     //reg.flush();
                     //JOptionPane.showMessageDialog(this, "Welcome Administrator!");
-                    
+
                 } catch (IOException ex) {
-                    
+
                 }
-                
+
             }
-            
+
             //jm_admin.setVisible(true);
             tf_login_password.setText("");
             tf_login_user.setText("");
             jmi_login.setEnabled(false);
             jmi_logout.setEnabled(true);
-            
+
         }
-        
+
     }//GEN-LAST:event_bt_login_inMouseClicked
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -1597,6 +1618,62 @@ public class MiniWindows extends javax.swing.JFrame {
     }//GEN-LAST:event_jmi_logoutActionPerformed
 
     private void jmi_admin_usersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_admin_usersActionPerformed
+
+        
+        DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Usuarios");
+        jtree_admin_users.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane13.setViewportView(jtree_admin_users);
+        
+        
+        DefaultTreeModel m = (DefaultTreeModel) jtree_admin_users.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
+        
+        
+        int cent = 0;
+        adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
+        au.leerUsuarioB();
+
+        
+        /*
+        for (Usuario u : au.getListaUsuarios()) {
+            String usuario = au.getListaUsuarios().get(cent).getUsuario();
+            String password = au.getListaUsuarios().get(cent).getPassword();
+
+            //Usuario n = new Usuario(usuario, password);
+
+            DefaultMutableTreeNode nodo_usuario;
+            nodo_usuario = new DefaultMutableTreeNode(new Usuario(usuario, password));
+        
+            DefaultMutableTreeNode info;
+            info = new DefaultMutableTreeNode(au.getListaUsuarios().get(0).getPassword());
+        
+            nodo_usuario.add(info);
+            raiz.add(nodo_usuario);
+            m.reload();
+            cent++;
+        }
+        
+        */
+
+        
+        
+        for (int i = 0; i < au.getListaUsuarios().size(); i++) {
+            
+            String usuario = au.getListaUsuarios().get(i).getUsuario();
+            String password = au.getListaUsuarios().get(i).getPassword();
+            
+            //Usuario n = new Usuario(usuario, password);
+            
+            DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(new Usuario(usuario,password));
+            raiz.add(nodo);
+            m.reload();
+            
+            for (int j = 0; j < raiz.getChildCount(); j++) {
+                
+                
+                
+            }
+        }
         jd_admin_users.pack();
         jd_admin_users.setModal(true);
         jd_admin_users.setLocationRelativeTo(this);
@@ -1667,7 +1744,7 @@ public class MiniWindows extends javax.swing.JFrame {
         try {
             Highlighter h1 = jep_texto.getHighlighter();
             Highlighter.HighlightPainter sombreador;
-            
+
             Color c = JColorChooser.showDialog(this, "Color?", Color.yellow);
 
             sombreador = new DefaultHighlighter.DefaultHighlightPainter(c);
@@ -1709,43 +1786,43 @@ public class MiniWindows extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6MouseClicked
 
     private void tbt_bMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbt_bMouseClicked
-        
-        if(tbt_b.isSelected()){
+
+        if (tbt_b.isSelected()) {
             //obtener estilo actual
-        StyledDocument doc = jep_texto.getStyledDocument();
+            StyledDocument doc = jep_texto.getStyledDocument();
 
-        //hacer mi estilo
-        Style estilo = jep_texto.addStyle("miEstilo", null);
-        StyleConstants.setForeground(estilo, Color.red);
-        StyleConstants.setUnderline(estilo, true);
-        StyleConstants.setFontSize(estilo, 24);
-        StyleConstants.setBold(estilo, true);
-        StyleConstants.setItalic(estilo, true);
+            //hacer mi estilo
+            Style estilo = jep_texto.addStyle("miEstilo", null);
+            StyleConstants.setForeground(estilo, Color.red);
+            StyleConstants.setUnderline(estilo, true);
+            StyleConstants.setFontSize(estilo, 24);
+            StyleConstants.setBold(estilo, true);
+            StyleConstants.setItalic(estilo, true);
 
-        //colorear una selección del textPane
-        doc.setCharacterAttributes(jep_texto.getSelectionStart(),
-                jep_texto.getSelectionEnd()
-                - jep_texto.getSelectionStart(),
-                jep_texto.getStyle("miEstilo"), true);
-        }else{
+            //colorear una selección del textPane
+            doc.setCharacterAttributes(jep_texto.getSelectionStart(),
+                    jep_texto.getSelectionEnd()
+                    - jep_texto.getSelectionStart(),
+                    jep_texto.getStyle("miEstilo"), true);
+        } else {
             System.out.println("sd");
         }
-        
+
     }//GEN-LAST:event_tbt_bMouseClicked
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
-        if(evt.isMetaDown()){
+        if (evt.isMetaDown()) {
             ppm_desktop.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void jmi_ppm_desktop_bgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_ppm_desktop_bgActionPerformed
-        JFileChooser fc =new JFileChooser("./src/img/bg");
-        FileFilter filtro = new FileNameExtensionFilter("Imagenes", "jpg","png","jpeg","gif");
+        JFileChooser fc = new JFileChooser("./src/img/bg");
+        FileFilter filtro = new FileNameExtensionFilter("Imagenes", "jpg", "png", "jpeg", "gif");
         fc.setFileFilter(filtro);
         File archivo;
         int op = fc.showOpenDialog(this);
-        if (op == JFileChooser.APPROVE_OPTION){
+        if (op == JFileChooser.APPROVE_OPTION) {
             archivo = fc.getSelectedFile();
             Image img = Toolkit.getDefaultToolkit().createImage(archivo.getPath()).getScaledInstance(1450, 1100, 0);
             this.jlb_bg.setIcon(new ImageIcon(img));
@@ -1753,149 +1830,199 @@ public class MiniWindows extends javax.swing.JFrame {
     }//GEN-LAST:event_jmi_ppm_desktop_bgActionPerformed
 
     private void jep_textoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jep_textoMouseClicked
-        if(evt.isMetaDown()){
+        if (evt.isMetaDown()) {
             ppm_editor.show(evt.getComponent(), evt.getX(), evt.getY());
-                    
+
         }
     }//GEN-LAST:event_jep_textoMouseClicked
 
     private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
-        if(evt.isMetaDown()){
+        if (evt.isMetaDown()) {
             ppm_chat.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_jTree1MouseClicked
 
     private void bt_msg_sendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_msg_sendMouseClicked
-        
+
         adminUsuariosMsj au = new adminUsuariosMsj("./mensajes.txt");
-        
+
         String textoEnviar = ta_msg_txt.getText();
-        
+
         UsuarioMsj ums1 = new UsuarioMsj("User1", "Apellido", "user01");
         UsuarioMsj ums2 = new UsuarioMsj("Usuario2", "LastName", "uzer02");
-        
+
         Mensaje m1 = new Mensaje(ums1.getUsuario(), ums2.getUsuario(), textoEnviar);
         //Agregar el mismo mensaje ambos contactos
         ums1.agregarMensaje(m1);
         ums2.agregarMensaje(m1);
-        
+
         au.agregarUsuarioMsj(ums1);
         au.agregarUsuarioMsj(ums2);
-        
+
         try {
-            
+
             au.escribirMensaje();
-            ta_msg_chat.append("user01"+":"+textoEnviar+"\n");
+            ta_msg_chat.append("user01" + ":" + textoEnviar + "\n");
             //JOptionPane.showMessageDialog(jd_messenger,"Mensaje envíado");
             ta_msg_txt.setText("");
-            
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        
+
         //au.leerMensaje();
         System.out.println(au.getListaUsuariosMsj().get(0).getApellido());
-        
+
         for (int i = 0; i < au.getListaUsuariosMsj().size(); i++) {
             for (int j = 0; j < au.getListaUsuariosMsj().get(i).getListaMensajes().size(); j++) {
                 System.out.println(au.getListaUsuariosMsj().get(i).getListaMensajes().get(i).getMensaje());
-                
+
             }
-            
+
         }
     }//GEN-LAST:event_bt_msg_sendMouseClicked
 
     private void bt_reds_perfil_addcommentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_reds_perfil_addcommentMouseClicked
-        
+
         String comentario = ta_reds_perfil_comment.getText();
         Date fecha = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         JButton like = new JButton("like");
-        
+
         like.add(like);
-        
-        
-        Object[] tabla = {comentario,dateFormat.format(fecha),like};
-        
-        DefaultTableModel model = (DefaultTableModel)tabla_reds_comments.getModel();
+
+        Object[] tabla = {comentario, dateFormat.format(fecha), like};
+
+        DefaultTableModel model = (DefaultTableModel) tabla_reds_comments.getModel();
         model.addRow(tabla);
         tabla_reds_comments.setModel(model);
-        
+
         ta_reds_perfil_comment.setText("");
     }//GEN-LAST:event_bt_reds_perfil_addcommentMouseClicked
 
     private void bt_signInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_signInMouseClicked
-        
+
         //adminUsuario au = new adminUsuario;
-        
+
     }//GEN-LAST:event_bt_signInMouseClicked
 
     private void tf_login_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_login_passwordKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-            
-            adminUsuario au = new adminUsuario("./usr.att");
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
             au.leerUsuarioB();
-            
-            
-            String usuario = tf_login_user.getText();
-            String password = tf_login_password.getText();
-            
-            boolean loggedon = false;
-//            for (Usuario u : au.getListaUsuarios()) {
-//                if(usuario.equals(u.getUsuario()) && password.equals(u.getPassword())){
-//                    loggedon=true;
-//                }
-//            }
-            
-            
-//            for (int i = 0; i < au.getListaUsuarios().size(); i++) {
-//                if(usuario.equals(au.getListaUsuarios().get(i).getUsuario()) && password.equals(au.getListaUsuarios().get(i).getPassword())){
-//                    loggedon=true;
-//                }
-//                
-//            }
-//            
-//            if(loggedon){
-//                JOptionPane.showMessageDialog(jd_login, "Welcome");
-//            }else{
-//                JOptionPane.showMessageDialog(jd_login, "No existe el usario");
-//            }
-            
-            if(au.validarUsuario(usuario, password)){
-                
+
+            if (au.validarUsuario(tf_login_user.getText(), tf_login_password.getText())) {
+
                 JOptionPane.showMessageDialog(jd_login, "Welcome");
-                
-            }else{
+
+                jd_login.dispose();
+                tf_login_user.setText("");
+                tf_login_password.setText("");
+            } else {
                 JOptionPane.showMessageDialog(jd_login, "No existe el usario");
             }
         }
     }//GEN-LAST:event_tf_login_passwordKeyPressed
 
     private void tf_admin_agregar_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_admin_agregar_passwordKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-            
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
             String usuario = tf_admin_agregar_user.getText();
             String password = tf_admin_agregar_password.getText();
-            
+
             Usuario n = new Usuario(usuario, password);
-            
-            adminUsuario au = new adminUsuario("./usr.att");
+
+            adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
             au.leerUsuarioB();
-            
-            
+
             au.agregarUsuario(n);
             au.escribirUsuarioB();
             
+            au.leerUsuarioB();
+            DefaultTreeModel m = (DefaultTreeModel)jtree_admin_users.getModel();
+            DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)m.getRoot();
             
+            for (int i = 0; i < au.getListaUsuarios().size(); i++) {
+                
+                String u = au.getListaUsuarios().get(i).getUsuario();
+                String p = au.getListaUsuarios().get(i).getPassword();
+                
+                
+                
+            }
+
             JOptionPane.showMessageDialog(jd_login, "Usuario agregado con éxito");
             tf_admin_agregar_password.setText("");
             tf_admin_agregar_user.setText("");
         }
     }//GEN-LAST:event_tf_admin_agregar_passwordKeyPressed
 
-    
-    
+    private void bt_admin_cargarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_admin_cargarMouseClicked
+
+        adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
+        au.leerUsuarioB();
+        
+        String usr1 = "Usuario",pwd1="password";
+
+        DefaultTreeModel m = (DefaultTreeModel)jtree_admin_users.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)m.getRoot();
+
+        DefaultMutableTreeNode nodo_usuario;
+        nodo_usuario = new DefaultMutableTreeNode(new Usuario(usr1, pwd1));
+        
+        DefaultMutableTreeNode info;
+        info = new DefaultMutableTreeNode(au.getListaUsuarios().get(0).getPassword());
+        
+        nodo_usuario.add(info);
+        raiz.add(nodo_usuario);
+        m.reload();
+
+        /*
+        for (int j = 0; j < raiz.getChildCount(); j++) {
+            
+            
+            
+            if(raiz.getChildAt(j).toString().equals(usr1)){
+                    DefaultMutableTreeNode n = 
+                            new DefaultMutableTreeNode(
+                                    new Usuario(usr1,pwd1));
+                    ((DefaultMutableTreeNode)raiz.getChildAt(j)).add(n);
+                    //centinela=1;
+                }
+
+            DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(tf_admin_agregar_user.getText());
+            DefaultMutableTreeNode neu = new DefaultMutableTreeNode(new Usuario(tf_admin_agregar_user.getText(), tf_admin_agregar_password.getText()));
+            ((DefaultMutableTreeNode)raiz.getChildAt(j)).add(neu);
+            //neu.add(nodo);
+            //raiz.add(neu);
+            
+            
+        }
+        */
+
+        for (int i = 0; i < raiz.getChildCount(); i++) {
+                
+                
+            }
+        
+        int cent = 0;
+        String s = "";
+
+        for (Usuario u : au.getListaUsuarios()) {
+            String usr = au.getListaUsuarios().get(cent).getUsuario();
+            String pwd = au.getListaUsuarios().get(cent).getPassword();
+
+            s += usr + "\n";
+
+        }
+
+        System.out.println(s);
+
+    }//GEN-LAST:event_bt_admin_cargarMouseClicked
+
     public void login() {
+
         jd_login.pack();
         jd_login.setModal(true);
         jd_login.setLocationRelativeTo(this);
@@ -1964,6 +2091,8 @@ public class MiniWindows extends javax.swing.JFrame {
         jd_netbeens.setLocationRelativeTo(this);
         jd_netbeens.setVisible(true);
     }
+    
+    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1999,6 +2128,7 @@ public class MiniWindows extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_admin_agregar_crearUsuario;
+    private javax.swing.JButton bt_admin_cargar;
     private javax.swing.JButton bt_login_in;
     private javax.swing.JButton bt_login_xl;
     private javax.swing.JButton bt_msg_select;
@@ -2069,6 +2199,7 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -2125,6 +2256,7 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmi_ppm_paste;
     private javax.swing.JMenuItem jmi_ppm_select;
     private javax.swing.JTree jtree1;
+    private javax.swing.JTree jtree_admin_users;
     private javax.swing.JPopupMenu ppm_chat;
     private javax.swing.JPopupMenu ppm_desktop;
     private javax.swing.JPopupMenu ppm_editor;
