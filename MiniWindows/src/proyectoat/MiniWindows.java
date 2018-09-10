@@ -162,7 +162,6 @@ public class MiniWindows extends javax.swing.JFrame {
         bt_signIn = new javax.swing.JButton();
         jd_admin_users = new javax.swing.JDialog();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel5 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         tf_admin_agregar_user = new javax.swing.JTextField();
@@ -172,6 +171,7 @@ public class MiniWindows extends javax.swing.JFrame {
         jScrollPane13 = new javax.swing.JScrollPane();
         jtree_admin_users = new javax.swing.JTree();
         bt_admin_cargar = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
         ppm_desktop = new javax.swing.JPopupMenu();
         jmi_ppm_desktop_bg = new javax.swing.JMenuItem();
         ppm_editor = new javax.swing.JPopupMenu();
@@ -1027,19 +1027,6 @@ public class MiniWindows extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 583, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 396, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Ver", jPanel5);
-
         jLabel3.setText("Usuario:");
 
         jLabel4.setText("Password:");
@@ -1113,6 +1100,19 @@ public class MiniWindows extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Agregar", jPanel4);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 583, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 396, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Ver", jPanel5);
 
         javax.swing.GroupLayout jd_admin_usersLayout = new javax.swing.GroupLayout(jd_admin_users.getContentPane());
         jd_admin_users.getContentPane().setLayout(jd_admin_usersLayout);
@@ -1594,10 +1594,13 @@ public class MiniWindows extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_login_inMouseClicked
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        
+        //Salir del sistema desde JMenu Exit
         int response = JOptionPane.showConfirmDialog(this, "¿Salir del sistema?", "Salir", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (response == JOptionPane.OK_OPTION) {
-
+            
+            //Validar que el usario termina la sesión.
             if (jmi_login.isEnabled() == false) {
                 JOptionPane.showMessageDialog(this, "Primero termine la sesión de usuario");
 
@@ -1608,6 +1611,7 @@ public class MiniWindows extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jmi_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_logoutActionPerformed
+        //Cerrar sesión de usuario
         int response = JOptionPane.showConfirmDialog(this, "¿Cerrar sesión de Usuario?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (response == JOptionPane.OK_OPTION) {
@@ -1619,7 +1623,7 @@ public class MiniWindows extends javax.swing.JFrame {
 
     private void jmi_admin_usersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_admin_usersActionPerformed
 
-        
+        //Reset de la vista para agregar archivos al JTree
         DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Usuarios");
         jtree_admin_users.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane13.setViewportView(jtree_admin_users);
@@ -1662,17 +1666,11 @@ public class MiniWindows extends javax.swing.JFrame {
             String usuario = au.getListaUsuarios().get(i).getUsuario();
             String password = au.getListaUsuarios().get(i).getPassword();
             
-            //Usuario n = new Usuario(usuario, password);
-            
             DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(new Usuario(usuario,password));
             raiz.add(nodo);
             m.reload();
             
-            for (int j = 0; j < raiz.getChildCount(); j++) {
-                
-                
-                
-            }
+            
         }
         jd_admin_users.pack();
         jd_admin_users.setModal(true);
@@ -1817,6 +1815,8 @@ public class MiniWindows extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void jmi_ppm_desktop_bgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_ppm_desktop_bgActionPerformed
+        
+        //cambiar fondo del background
         JFileChooser fc = new JFileChooser("./src/img/bg");
         FileFilter filtro = new FileNameExtensionFilter("Imagenes", "jpg", "png", "jpeg", "gif");
         fc.setFileFilter(filtro);
@@ -1914,6 +1914,7 @@ public class MiniWindows extends javax.swing.JFrame {
 
             if (au.validarUsuario(tf_login_user.getText(), tf_login_password.getText())) {
 
+                au.buscarUsuario(tf_login_user.getText());
                 JOptionPane.showMessageDialog(jd_login, "Welcome");
 
                 jd_login.dispose();
@@ -1928,6 +1929,8 @@ public class MiniWindows extends javax.swing.JFrame {
     private void tf_admin_agregar_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_admin_agregar_passwordKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
+            
+            
             String usuario = tf_admin_agregar_user.getText();
             String password = tf_admin_agregar_password.getText();
 
@@ -1936,8 +1939,18 @@ public class MiniWindows extends javax.swing.JFrame {
             adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
             au.leerUsuarioB();
 
+            if(au.buscarUsuario(usuario)){
+                JOptionPane.showMessageDialog(jd_admin_users,"Ya existe ese usuario, elija otro");
+                tf_admin_agregar_user.setText("");
+                tf_admin_agregar_password.setText("");
+            }else{
+            
             au.agregarUsuario(n);
             au.escribirUsuarioB();
+            
+            DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Usuarios");
+                jtree_admin_users.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+                jScrollPane13.setViewportView(jtree_admin_users);
             
             au.leerUsuarioB();
             DefaultTreeModel m = (DefaultTreeModel)jtree_admin_users.getModel();
@@ -1948,20 +1961,25 @@ public class MiniWindows extends javax.swing.JFrame {
                 String u = au.getListaUsuarios().get(i).getUsuario();
                 String p = au.getListaUsuarios().get(i).getPassword();
                 
-                
-                
+                raiz.add(new DefaultMutableTreeNode(new Usuario(u,p)));
+                m.reload();
             }
 
             JOptionPane.showMessageDialog(jd_login, "Usuario agregado con éxito");
             tf_admin_agregar_password.setText("");
             tf_admin_agregar_user.setText("");
+            }
         }
     }//GEN-LAST:event_tf_admin_agregar_passwordKeyPressed
 
     private void bt_admin_cargarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_admin_cargarMouseClicked
 
+        
+        
         adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
         au.leerUsuarioB();
+        
+        System.out.println(au.posicionUsuario("vegeta"));
         
         String usr1 = "Usuario",pwd1="password";
 
@@ -2274,5 +2292,6 @@ public class MiniWindows extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     String admin = "admin", password = "admin";
-
+    int posicion_usuario=-1;
+    
 }
