@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -157,6 +158,7 @@ public class MiniWindows extends javax.swing.JFrame {
         bt_login_in = new javax.swing.JButton();
         bt_login_xl = new javax.swing.JButton();
         tf_login_password = new javax.swing.JPasswordField();
+        bt_signIn = new javax.swing.JButton();
         jd_admin_users = new javax.swing.JDialog();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
@@ -955,6 +957,19 @@ public class MiniWindows extends javax.swing.JFrame {
 
         bt_login_xl.setText("Cancelar");
 
+        tf_login_password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tf_login_passwordKeyPressed(evt);
+            }
+        });
+
+        bt_signIn.setText("Sign In");
+        bt_signIn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_signInMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -962,6 +977,7 @@ public class MiniWindows extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(bt_signIn)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(bt_login_xl)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -987,7 +1003,9 @@ public class MiniWindows extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tf_login_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bt_signIn)
+                .addGap(1, 1, 1)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_login_in)
                     .addComponent(bt_login_xl))
@@ -1008,6 +1026,12 @@ public class MiniWindows extends javax.swing.JFrame {
         jLabel3.setText("Usuario:");
 
         jLabel4.setText("Password:");
+
+        tf_admin_agregar_password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tf_admin_agregar_passwordKeyPressed(evt);
+            }
+        });
 
         bt_admin_agregar_crearUsuario.setText("Crear Usuario");
         bt_admin_agregar_crearUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1800,6 +1824,77 @@ public class MiniWindows extends javax.swing.JFrame {
         ta_reds_perfil_comment.setText("");
     }//GEN-LAST:event_bt_reds_perfil_addcommentMouseClicked
 
+    private void bt_signInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_signInMouseClicked
+        
+        //adminUsuario au = new adminUsuario;
+        
+    }//GEN-LAST:event_bt_signInMouseClicked
+
+    private void tf_login_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_login_passwordKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            
+            adminUsuario au = new adminUsuario("./usr.att");
+            au.leerUsuarioB();
+            
+            
+            String usuario = tf_login_user.getText();
+            String password = tf_login_password.getText();
+            
+            boolean loggedon = false;
+//            for (Usuario u : au.getListaUsuarios()) {
+//                if(usuario.equals(u.getUsuario()) && password.equals(u.getPassword())){
+//                    loggedon=true;
+//                }
+//            }
+            
+            
+//            for (int i = 0; i < au.getListaUsuarios().size(); i++) {
+//                if(usuario.equals(au.getListaUsuarios().get(i).getUsuario()) && password.equals(au.getListaUsuarios().get(i).getPassword())){
+//                    loggedon=true;
+//                }
+//                
+//            }
+//            
+//            if(loggedon){
+//                JOptionPane.showMessageDialog(jd_login, "Welcome");
+//            }else{
+//                JOptionPane.showMessageDialog(jd_login, "No existe el usario");
+//            }
+            
+            if(au.validarUsuario(usuario, password)){
+                
+                JOptionPane.showMessageDialog(jd_login, "Welcome");
+                
+            }else{
+                JOptionPane.showMessageDialog(jd_login, "No existe el usario");
+            }
+        }
+    }//GEN-LAST:event_tf_login_passwordKeyPressed
+
+    private void tf_admin_agregar_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_admin_agregar_passwordKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            
+            String usuario = tf_admin_agregar_user.getText();
+            String password = tf_admin_agregar_password.getText();
+            
+            Usuario n = new Usuario(usuario, password);
+            
+            adminUsuario au = new adminUsuario("./usr.att");
+            au.leerUsuarioB();
+            
+            
+            au.agregarUsuario(n);
+            au.escribirUsuarioB();
+            
+            
+            JOptionPane.showMessageDialog(jd_login, "Usuario agregado con éxito");
+            tf_admin_agregar_password.setText("");
+            tf_admin_agregar_user.setText("");
+        }
+    }//GEN-LAST:event_tf_admin_agregar_passwordKeyPressed
+
+    
+    
     public void login() {
         jd_login.pack();
         jd_login.setModal(true);
@@ -1909,6 +2004,7 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JButton bt_msg_select;
     private javax.swing.JButton bt_msg_send;
     private javax.swing.JButton bt_reds_perfil_addcomment;
+    private javax.swing.JButton bt_signIn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
