@@ -2,11 +2,12 @@
 
 package messenger;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import proyectoat.Usuario;
 
 
-public class UsuarioMsj extends Usuario{
+public class UsuarioMsj extends Usuario implements Serializable{
 
     private ArrayList<Mensaje> listaMensajes = new ArrayList();
     private ArrayList<Mensaje> enviado = new ArrayList();
@@ -53,11 +54,11 @@ public class UsuarioMsj extends Usuario{
     }
     
     public void enviarMensaje(Mensaje m){
-        this.listaMensajes.add(m);
+        this.enviado.add(m);
     }
     
     public void recibirMensaje(Mensaje m){
-        this.listaMensajes.add(m);
+        this.recibido.add(m);
     }
     
 }

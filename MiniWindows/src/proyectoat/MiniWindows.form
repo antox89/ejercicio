@@ -744,7 +744,11 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jScrollPane4" min="-2" pref="390" max="-2" attributes="0"/>
                                   <Component id="jScrollPane5" min="-2" pref="390" max="-2" attributes="0"/>
-                                  <Component id="bt_msg_send" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="bt_msg_sendT" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                                      <Component id="bt_msg_send" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
@@ -790,7 +794,10 @@
                           <Component id="jScrollPane6" min="-2" pref="319" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="bt_msg_send" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="bt_msg_send" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bt_msg_sendT" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace pref="15" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -875,6 +882,14 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel12"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="bt_msg_sendT">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Send"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bt_msg_sendTMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -1578,6 +1593,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Chat"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmi_ppm_chatActionPerformed"/>
+          </Events>
         </MenuItem>
       </SubComponents>
     </Container>

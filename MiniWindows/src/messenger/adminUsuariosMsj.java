@@ -2,16 +2,26 @@
 
 package messenger;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
+import java.io.EOFException;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
-public class adminUsuariosMsj {
+public class adminUsuariosMsj implements Serializable{
     
     private ArrayList<UsuarioMsj> listaUsuariosMsj = new ArrayList();
     private File archivo = null;
@@ -44,6 +54,55 @@ public class adminUsuariosMsj {
     public void agregarUsuarioMsj(UsuarioMsj umsj){
         this.listaUsuariosMsj.add(umsj);
     }
+    
+    public void createUser() throws IOException{
+        FileOutputStream fw = null;
+        ObjectOutputStream bw = null;
+        
+        try{
+            fw = new FileOutputStream(archivo);
+            bw = new ObjectOutputStream(fw);
+            for (UsuarioMsj u : listaUsuariosMsj) {
+                bw.writeObject(u);
+            }
+            bw.flush();
+        } catch (FileNotFoundException ex) {
+            
+        } catch (IOException ex) {
+            
+        }
+        bw.close();
+        fw.close();
+    }
+    
+    public void readUser(){
+        
+        listaUsuariosMsj = new ArrayList();
+        UsuarioMsj temp;
+        
+        FileInputStream fr = null;
+        ObjectInputStream br = null;
+        
+        if(archivo.exists()){
+            try{
+                fr=new FileInputStream(archivo);
+                br = new ObjectInputStream(fr);
+                
+                while( (temp = (UsuarioMsj) br.readObject())!=null){
+                    listaUsuariosMsj.add(temp);
+                }
+                br.close();
+                fr.close();
+            }catch (EOFException e) {
+
+            } catch (IOException ex) {
+                
+            } catch (ClassNotFoundException ex) {
+                
+            }
+        }
+    }
+    
     
     public void escribirMensaje() throws IOException{
         FileWriter fw = null;
