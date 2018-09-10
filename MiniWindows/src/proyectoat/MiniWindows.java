@@ -122,10 +122,12 @@ public class MiniWindows extends javax.swing.JFrame {
         ta_msg_txt = new javax.swing.JTextArea();
         bt_msg_send = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        jtree_msg_users = new javax.swing.JTree();
         jLabel7 = new javax.swing.JLabel();
         tf_msg_para = new javax.swing.JTextField();
         bt_msg_select = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jlb_msg_de = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -159,7 +161,6 @@ public class MiniWindows extends javax.swing.JFrame {
         bt_login_in = new javax.swing.JButton();
         bt_login_xl = new javax.swing.JButton();
         tf_login_password = new javax.swing.JPasswordField();
-        bt_signIn = new javax.swing.JButton();
         jd_admin_users = new javax.swing.JDialog();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
@@ -193,6 +194,7 @@ public class MiniWindows extends javax.swing.JFrame {
         jl_tb_msgr = new javax.swing.JLabel();
         jl_tb_socialnet = new javax.swing.JLabel();
         jl_tb_netbeens = new javax.swing.JLabel();
+        jButton16 = new javax.swing.JButton();
         jlb_bg = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jm_start = new javax.swing.JMenu();
@@ -680,17 +682,21 @@ public class MiniWindows extends javax.swing.JFrame {
         });
 
         treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Usuarios");
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtree_msg_users.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jtree_msg_users.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTree1MouseClicked(evt);
+                jtree_msg_usersMouseClicked(evt);
             }
         });
-        jScrollPane6.setViewportView(jTree1);
+        jScrollPane6.setViewportView(jtree_msg_users);
 
         jLabel7.setText("Para:");
 
         bt_msg_select.setText("Seleccionar...");
+
+        jLabel11.setText("De:");
+
+        jlb_msg_de.setText("jLabel12");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -698,17 +704,22 @@ public class MiniWindows extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(48, 48, 48)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(bt_msg_send, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bt_msg_send, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(jPanel8Layout.createSequentialGroup()
+                            .addComponent(jLabel7)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(tf_msg_para)
+                            .addGap(18, 18, 18)
+                            .addComponent(bt_msg_select)))
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tf_msg_para)
+                        .addComponent(jLabel11)
                         .addGap(18, 18, 18)
-                        .addComponent(bt_msg_select)))
+                        .addComponent(jlb_msg_de)))
                 .addGap(40, 40, 40)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(40, Short.MAX_VALUE))
@@ -724,7 +735,11 @@ public class MiniWindows extends javax.swing.JFrame {
                             .addComponent(tf_msg_para, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(bt_msg_select))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jlb_msg_de))
+                        .addGap(21, 21, 21)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -967,13 +982,6 @@ public class MiniWindows extends javax.swing.JFrame {
             }
         });
 
-        bt_signIn.setText("Sign In");
-        bt_signIn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bt_signInMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -981,7 +989,6 @@ public class MiniWindows extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(bt_signIn)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(bt_login_xl)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1007,9 +1014,7 @@ public class MiniWindows extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tf_login_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bt_signIn)
-                .addGap(1, 1, 1)
+                .addGap(39, 39, 39)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_login_in)
                     .addComponent(bt_login_xl))
@@ -1301,6 +1306,14 @@ public class MiniWindows extends javax.swing.JFrame {
         jToolBar1.add(jl_tb_netbeens);
 
         jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 54, 56, 433));
+
+        jButton16.setText("Usuario Actual");
+        jButton16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton16MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, -1, -1));
 
         jlb_bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bg/bg_3.jpg"))); // NOI18N
         jlb_bg.setPreferredSize(new java.awt.Dimension(1450, 1100));
@@ -1594,12 +1607,12 @@ public class MiniWindows extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_login_inMouseClicked
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        
+
         //Salir del sistema desde JMenu Exit
         int response = JOptionPane.showConfirmDialog(this, "¿Salir del sistema?", "Salir", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (response == JOptionPane.OK_OPTION) {
-            
+
             //Validar que el usario termina la sesión.
             if (jmi_login.isEnabled() == false) {
                 JOptionPane.showMessageDialog(this, "Primero termine la sesión de usuario");
@@ -1616,6 +1629,7 @@ public class MiniWindows extends javax.swing.JFrame {
 
         if (response == JOptionPane.OK_OPTION) {
             //jm_admin.setVisible(false);
+            
             jmi_login.setEnabled(true);
             jmi_logout.setEnabled(false);
         }
@@ -1627,17 +1641,14 @@ public class MiniWindows extends javax.swing.JFrame {
         DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Usuarios");
         jtree_admin_users.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane13.setViewportView(jtree_admin_users);
-        
-        
+
         DefaultTreeModel m = (DefaultTreeModel) jtree_admin_users.getModel();
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
-        
-        
+
         int cent = 0;
         adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
         au.leerUsuarioB();
 
-        
         /*
         for (Usuario u : au.getListaUsuarios()) {
             String usuario = au.getListaUsuarios().get(cent).getUsuario();
@@ -1657,20 +1668,16 @@ public class MiniWindows extends javax.swing.JFrame {
             cent++;
         }
         
-        */
-
-        
-        
+         */
         for (int i = 0; i < au.getListaUsuarios().size(); i++) {
-            
+
             String usuario = au.getListaUsuarios().get(i).getUsuario();
             String password = au.getListaUsuarios().get(i).getPassword();
-            
-            DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(new Usuario(usuario,password));
+
+            DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(new Usuario(usuario, password));
             raiz.add(nodo);
             m.reload();
-            
-            
+
         }
         jd_admin_users.pack();
         jd_admin_users.setModal(true);
@@ -1815,7 +1822,7 @@ public class MiniWindows extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void jmi_ppm_desktop_bgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_ppm_desktop_bgActionPerformed
-        
+
         //cambiar fondo del background
         JFileChooser fc = new JFileChooser("./src/img/bg");
         FileFilter filtro = new FileNameExtensionFilter("Imagenes", "jpg", "png", "jpeg", "gif");
@@ -1836,11 +1843,11 @@ public class MiniWindows extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jep_textoMouseClicked
 
-    private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
+    private void jtree_msg_usersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtree_msg_usersMouseClicked
         if (evt.isMetaDown()) {
             ppm_chat.show(evt.getComponent(), evt.getX(), evt.getY());
         }
-    }//GEN-LAST:event_jTree1MouseClicked
+    }//GEN-LAST:event_jtree_msg_usersMouseClicked
 
     private void bt_msg_sendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_msg_sendMouseClicked
 
@@ -1900,12 +1907,6 @@ public class MiniWindows extends javax.swing.JFrame {
         ta_reds_perfil_comment.setText("");
     }//GEN-LAST:event_bt_reds_perfil_addcommentMouseClicked
 
-    private void bt_signInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_signInMouseClicked
-
-        //adminUsuario au = new adminUsuario;
-
-    }//GEN-LAST:event_bt_signInMouseClicked
-
     private void tf_login_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_login_passwordKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
@@ -1914,7 +1915,8 @@ public class MiniWindows extends javax.swing.JFrame {
 
             if (au.validarUsuario(tf_login_user.getText(), tf_login_password.getText())) {
 
-                au.buscarUsuario(tf_login_user.getText());
+                posicion_usuario = au.posicionUsuario(tf_login_user.getText());
+                
                 JOptionPane.showMessageDialog(jd_login, "Welcome");
 
                 jd_login.dispose();
@@ -1929,8 +1931,6 @@ public class MiniWindows extends javax.swing.JFrame {
     private void tf_admin_agregar_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_admin_agregar_passwordKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
-            
-            
             String usuario = tf_admin_agregar_user.getText();
             String password = tf_admin_agregar_password.getText();
 
@@ -1939,59 +1939,57 @@ public class MiniWindows extends javax.swing.JFrame {
             adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
             au.leerUsuarioB();
 
-            if(au.buscarUsuario(usuario)){
-                JOptionPane.showMessageDialog(jd_admin_users,"Ya existe ese usuario, elija otro");
+            if (au.buscarUsuario(usuario)) {
+                JOptionPane.showMessageDialog(jd_admin_users, "Ya existe ese usuario, elija otro");
                 tf_admin_agregar_user.setText("");
                 tf_admin_agregar_password.setText("");
-            }else{
-            
-            au.agregarUsuario(n);
-            au.escribirUsuarioB();
-            
-            DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Usuarios");
+            } else {
+
+                au.agregarUsuario(n);
+                au.escribirUsuarioB();
+
+                DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Usuarios");
                 jtree_admin_users.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
                 jScrollPane13.setViewportView(jtree_admin_users);
-            
-            au.leerUsuarioB();
-            DefaultTreeModel m = (DefaultTreeModel)jtree_admin_users.getModel();
-            DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)m.getRoot();
-            
-            for (int i = 0; i < au.getListaUsuarios().size(); i++) {
-                
-                String u = au.getListaUsuarios().get(i).getUsuario();
-                String p = au.getListaUsuarios().get(i).getPassword();
-                
-                raiz.add(new DefaultMutableTreeNode(new Usuario(u,p)));
-                m.reload();
-            }
 
-            JOptionPane.showMessageDialog(jd_login, "Usuario agregado con éxito");
-            tf_admin_agregar_password.setText("");
-            tf_admin_agregar_user.setText("");
+                au.leerUsuarioB();
+                DefaultTreeModel m = (DefaultTreeModel) jtree_admin_users.getModel();
+                DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
+
+                for (int i = 0; i < au.getListaUsuarios().size(); i++) {
+
+                    String u = au.getListaUsuarios().get(i).getUsuario();
+                    String p = au.getListaUsuarios().get(i).getPassword();
+
+                    raiz.add(new DefaultMutableTreeNode(new Usuario(u, p)));
+                    m.reload();
+                }
+
+                JOptionPane.showMessageDialog(jd_login, "Usuario agregado con éxito");
+                tf_admin_agregar_password.setText("");
+                tf_admin_agregar_user.setText("");
             }
         }
     }//GEN-LAST:event_tf_admin_agregar_passwordKeyPressed
 
     private void bt_admin_cargarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_admin_cargarMouseClicked
 
-        
-        
         adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
         au.leerUsuarioB();
-        
-        System.out.println(au.posicionUsuario("vegeta"));
-        
-        String usr1 = "Usuario",pwd1="password";
 
-        DefaultTreeModel m = (DefaultTreeModel)jtree_admin_users.getModel();
-        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)m.getRoot();
+        System.out.println(au.posicionUsuario("vegeta"));
+
+        String usr1 = "Usuario", pwd1 = "password";
+
+        DefaultTreeModel m = (DefaultTreeModel) jtree_admin_users.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
 
         DefaultMutableTreeNode nodo_usuario;
         nodo_usuario = new DefaultMutableTreeNode(new Usuario(usr1, pwd1));
-        
+
         DefaultMutableTreeNode info;
         info = new DefaultMutableTreeNode(au.getListaUsuarios().get(0).getPassword());
-        
+
         nodo_usuario.add(info);
         raiz.add(nodo_usuario);
         m.reload();
@@ -2017,13 +2015,11 @@ public class MiniWindows extends javax.swing.JFrame {
             
             
         }
-        */
-
+         */
         for (int i = 0; i < raiz.getChildCount(); i++) {
-                
-                
-            }
-        
+
+        }
+
         int cent = 0;
         String s = "";
 
@@ -2038,6 +2034,15 @@ public class MiniWindows extends javax.swing.JFrame {
         System.out.println(s);
 
     }//GEN-LAST:event_bt_admin_cargarMouseClicked
+
+    private void jButton16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton16MouseClicked
+        
+        
+        adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
+        au.leerUsuarioB();
+        
+        JOptionPane.showMessageDialog(this, "Usuario acutal: "+au.getListaUsuarios().get(posicion_usuario).getUsuario());
+    }//GEN-LAST:event_jButton16MouseClicked
 
     public void login() {
 
@@ -2090,6 +2095,29 @@ public class MiniWindows extends javax.swing.JFrame {
     }
 
     public void mostrarMessenger() {
+        
+        //Reset de la vista para agregar archivos al JTree
+        DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Usuarios");
+        jtree_msg_users.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane6.setViewportView(jtree_msg_users);
+        
+        adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
+        au.leerUsuarioB();
+        
+        jlb_msg_de.setText(au.getListaUsuarios().get(posicion_usuario).getUsuario());
+        
+        
+        DefaultTreeModel m = (DefaultTreeModel)jtree_msg_users.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)m.getRoot();
+        
+        for (int i = 0; i < au.getListaUsuarios().size(); i++) {
+            raiz.add(new DefaultMutableTreeNode(new Usuario(
+            au.getListaUsuarios().get(i).getUsuario(),
+            au.getListaUsuarios().get(i).getPassword())));
+            m.reload();
+        }
+        
+        
         jd_messenger.pack();
         jd_messenger.setModal(true);
         jd_messenger.setLocationRelativeTo(this);
@@ -2109,8 +2137,6 @@ public class MiniWindows extends javax.swing.JFrame {
         jd_netbeens.setLocationRelativeTo(this);
         jd_netbeens.setVisible(true);
     }
-    
-    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -2152,7 +2178,6 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JButton bt_msg_select;
     private javax.swing.JButton bt_msg_send;
     private javax.swing.JButton bt_reds_perfil_addcomment;
-    private javax.swing.JButton bt_signIn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -2160,6 +2185,7 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -2173,6 +2199,7 @@ public class MiniWindows extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -2234,7 +2261,6 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JTree jTree1;
     private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JDialog jd_admin_users;
     private javax.swing.JDialog jd_agenda;
@@ -2258,6 +2284,7 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JLabel jl_tb_socialnet;
     private javax.swing.JLabel jl_tb_text;
     private javax.swing.JLabel jlb_bg;
+    private javax.swing.JLabel jlb_msg_de;
     private javax.swing.JLabel jlb_player_intime;
     private javax.swing.JLabel jlb_player_outime;
     private javax.swing.JLabel jlb_redsocial_perfil_pic;
@@ -2275,6 +2302,7 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmi_ppm_select;
     private javax.swing.JTree jtree1;
     private javax.swing.JTree jtree_admin_users;
+    private javax.swing.JTree jtree_msg_users;
     private javax.swing.JPopupMenu ppm_chat;
     private javax.swing.JPopupMenu ppm_desktop;
     private javax.swing.JPopupMenu ppm_editor;
@@ -2292,6 +2320,6 @@ public class MiniWindows extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     String admin = "admin", password = "admin";
-    int posicion_usuario=-1;
-    
+    int posicion_usuario = -1;
+
 }
