@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import messenger.Mensaje;
 
 public class adminUsuario implements Serializable{
 
@@ -52,11 +53,21 @@ public class adminUsuario implements Serializable{
     public String toString() {
         return "listaUsuarios=" + listaUsuarios + '}';
     }
-
+    //Agegar un usuario uno por uno
     public void agregarUsuario(Usuario u) {
         this.listaUsuarios.add(u);
     }
     
+    public void agregarMensaje(int pos, Mensaje m){
+        this.listaUsuarios.get(pos).getListaMensajes().add(m);
+    }
+    
+    public void enviarMensaje(int pos, Mensaje m){
+        
+        
+    }
+    
+    //buscar la posición del usuario
     public int posicionUsuario(String usuario){
         int n = listaUsuarios.size();
         for (int i = 0; i < n; i++) {
@@ -68,6 +79,7 @@ public class adminUsuario implements Serializable{
         return -1;
     }
     
+    //Verificar si ya existe el usuario
     public boolean buscarUsuario(String usuario){
         for (Usuario us : listaUsuarios) {
             if (us.getUsuario().equals(usuario)) {
@@ -77,6 +89,7 @@ public class adminUsuario implements Serializable{
         return false;
     }
 
+    //Validación usario y contraseña
     public boolean validarUsuario(String usuario, String password) {
         for (Usuario us : listaUsuarios) {
             if (us.getUsuario().equals(usuario) && us.getPassword().equals(password)) {
@@ -85,7 +98,20 @@ public class adminUsuario implements Serializable{
         }
         return false;
     }
+    
+    
+    
+    
+    public void v(){
+        for (Usuario u : listaUsuarios) {
+            for (Mensaje m : u.getListaMensajes()) {
+                m.getEmisor();
+            }
+        }
+    }
 
+    
+    //Guardar usuario en binario
     public void escribirUsuarioB() {
 
         FileOutputStream fw = null;
@@ -113,6 +139,7 @@ public class adminUsuario implements Serializable{
 
     }
 
+    //leer usuario binario
     public void leerUsuarioB() {
 
         try {
@@ -140,6 +167,8 @@ public class adminUsuario implements Serializable{
 
     }
 
+    
+    //Escribir archivo de texto con usuario y contraseña
     public void escribirUsuarioT() throws IOException {
 
         FileWriter fw = null;
@@ -165,6 +194,7 @@ public class adminUsuario implements Serializable{
 
     }
 
+    //Registrar usuario con contraseña encriptada
     public void registrarUsuario(String usuario, String password) {
         //if(!password.isEmpty() && !usuario.isEmpty()){
         String pass = new String(password);

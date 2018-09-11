@@ -1647,7 +1647,7 @@ public class MiniWindows extends javax.swing.JFrame {
 
         if (response == JOptionPane.OK_OPTION) {
             //jm_admin.setVisible(false);
-            
+
             jmi_login.setEnabled(true);
             jmi_logout.setEnabled(false);
         }
@@ -1863,27 +1863,24 @@ public class MiniWindows extends javax.swing.JFrame {
 
     private void jtree_msg_usersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtree_msg_usersMouseClicked
         if (evt.isMetaDown()) {
-            
+
             int row = jtree_msg_users.getClosestRowForLocation(evt.getX(), evt.getY());
             jtree_msg_users.setSelectionRow(row);
-            
+
             Object v1 = jtree_msg_users.getSelectionPath().getLastPathComponent();
-            nodo_seleccionado = (DefaultMutableTreeNode)v1;
-            
-            if(nodo_seleccionado.getUserObject() instanceof Usuario){
+            nodo_seleccionado = (DefaultMutableTreeNode) v1;
+
+            if (nodo_seleccionado.getUserObject() instanceof Usuario) {
                 usuario_seleccionado
-                        = (Usuario)nodo_seleccionado.getUserObject();
+                        = (Usuario) nodo_seleccionado.getUserObject();
                 ppm_chat.show(evt.getComponent(), evt.getX(), evt.getY());
             }
-            
-            
+
         }
     }//GEN-LAST:event_jtree_msg_usersMouseClicked
 
     private void bt_msg_sendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_msg_sendMouseClicked
 
-        
-        
         adminUsuariosMsj au = new adminUsuariosMsj("./mensajes.txt");
 
         String textoEnviar = ta_msg_txt.getText();
@@ -1949,7 +1946,7 @@ public class MiniWindows extends javax.swing.JFrame {
             if (au.validarUsuario(tf_login_user.getText(), tf_login_password.getText())) {
 
                 posicion_usuario = au.posicionUsuario(tf_login_user.getText());
-                
+
                 JOptionPane.showMessageDialog(jd_login, "Welcome");
 
                 jd_login.dispose();
@@ -2027,8 +2024,6 @@ public class MiniWindows extends javax.swing.JFrame {
         raiz.add(nodo_usuario);
         m.reload();
 
-        
-
         int cent = 0;
         String s = "";
 
@@ -2045,38 +2040,44 @@ public class MiniWindows extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_admin_cargarMouseClicked
 
     private void jButton16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton16MouseClicked
-        
-        
+
         adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
         au.leerUsuarioB();
-        
-        JOptionPane.showMessageDialog(this, "Usuario acutal: "+au.getListaUsuarios().get(posicion_usuario).getUsuario());
+
+        JOptionPane.showMessageDialog(this, "Usuario acutal: " + au.getListaUsuarios().get(posicion_usuario).getUsuario());
     }//GEN-LAST:event_jButton16MouseClicked
 
     private void jmi_ppm_chatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_ppm_chatActionPerformed
-        
+
         adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
         au.leerUsuarioB();
-        
-        int row = jtree_msg_users.getLeadSelectionRow()-1;
-        posicion_seleccionado = row-1;
+
+        int row = jtree_msg_users.getLeadSelectionRow() - 1;
+        posicion_seleccionado = row - 1;
         jtree_msg_users.setSelectionRow(row);
-        
+
         tf_msg_para.setText(au.getListaUsuarios().get(row).getUsuario());
-        
+
     }//GEN-LAST:event_jmi_ppm_chatActionPerformed
 
     private void bt_msg_sendTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_msg_sendTMouseClicked
-        
-        UsuarioMsj test1= new UsuarioMsj();
-        
+
         adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
         au.leerUsuarioB();
+
+        Mensaje m = new Mensaje(au.getListaUsuarios().get(posicion_usuario).getUsuario(), 
+                au.getListaUsuarios().get(posicion_seleccionado).getUsuario(), "Hola Mundo");
         
-        Mensaje m = new Mensaje(au.getListaUsuarios().get(posicion_usuario).getUsuario(),"nuew","hola");
+        au.agregarMensaje(posicion_usuario, m);
+        au.agregarMensaje(posicion_seleccionado, m);
         
-        //(UsuarioMsj)(au.getListaUsuarios().get(posicion_seleccionado))test1.getNombre()
+        au.escribirUsuarioB();
         
+        au.leerUsuarioB();
+        System.out.println(au.getListaUsuarios().get(posicion_usuario).getListaMensajes().get(0).getMensaje());
+        //au.getListaUsuarios().get(posicion_usuario).getListaMensajes().add(m);
+
+
     }//GEN-LAST:event_bt_msg_sendTMouseClicked
 
     public void login() {
@@ -2130,29 +2131,27 @@ public class MiniWindows extends javax.swing.JFrame {
     }
 
     public void mostrarMessenger() {
-        
+
         //Reset de la vista para agregar archivos al JTree
         DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Usuarios");
         jtree_msg_users.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane6.setViewportView(jtree_msg_users);
-        
+
         adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
         au.leerUsuarioB();
-        
+
         jlb_msg_de.setText(au.getListaUsuarios().get(posicion_usuario).getUsuario());
-        
-        
-        DefaultTreeModel m = (DefaultTreeModel)jtree_msg_users.getModel();
-        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)m.getRoot();
-        
+
+        DefaultTreeModel m = (DefaultTreeModel) jtree_msg_users.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
+
         for (int i = 0; i < au.getListaUsuarios().size(); i++) {
             raiz.add(new DefaultMutableTreeNode(new Usuario(
-            au.getListaUsuarios().get(i).getUsuario(),
-            au.getListaUsuarios().get(i).getPassword())));
+                    au.getListaUsuarios().get(i).getUsuario(),
+                    au.getListaUsuarios().get(i).getPassword())));
             m.reload();
         }
-        
-        
+
         jd_messenger.pack();
         jd_messenger.setModal(true);
         jd_messenger.setLocationRelativeTo(this);

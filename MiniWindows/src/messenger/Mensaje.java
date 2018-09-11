@@ -2,8 +2,10 @@
 
 package messenger;
 
+import java.io.Serializable;
 
-public class Mensaje {
+
+public class Mensaje implements Serializable{
     
     private String emisor, receptor, mensaje;
 

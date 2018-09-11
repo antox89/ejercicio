@@ -55,6 +55,16 @@ public class adminUsuariosMsj implements Serializable{
         this.listaUsuariosMsj.add(umsj);
     }
     
+    public int posicionUsuario(UsuarioMsj u){
+        int p = listaUsuariosMsj.size();
+        for (int i = 0; i < p; i++) {
+            if(listaUsuariosMsj.get(i).equals(u)){
+                return i;
+            }
+        }
+        return -1;
+    }
+    
     public void createUser() throws IOException{
         FileOutputStream fw = null;
         ObjectOutputStream bw = null;
