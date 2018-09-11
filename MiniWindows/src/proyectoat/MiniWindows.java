@@ -50,6 +50,10 @@ public class MiniWindows extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         //this.setExtendedState(MAXIMIZED_BOTH);
 
+        adminHora h = new adminHora(jlb_desktop_hora);
+        Thread proceso1 = new Thread(h);
+        proceso1.start();
+        
         jmi_logout.setEnabled(false);
         //jm_admin.setVisible(false);
     }
@@ -192,6 +196,8 @@ public class MiniWindows extends javax.swing.JFrame {
         ppm_chat = new javax.swing.JPopupMenu();
         jmi_ppm_chat = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
+        jlb_desktop_user = new javax.swing.JLabel();
+        jlb_desktop_hora = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
         jl_tb_explorer = new javax.swing.JLabel();
         jl_tb_text = new javax.swing.JLabel();
@@ -1229,6 +1235,14 @@ public class MiniWindows extends javax.swing.JFrame {
         });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jlb_desktop_user.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jlb_desktop_user.setText("Usuario");
+        jPanel1.add(jlb_desktop_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 40, -1, -1));
+
+        jlb_desktop_hora.setFont(new java.awt.Font("Lucida Sans", 0, 18)); // NOI18N
+        jlb_desktop_hora.setText("00:00");
+        jPanel1.add(jlb_desktop_hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 40, -1, -1));
+
         jToolBar1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar1.setRollover(true);
 
@@ -1992,6 +2006,8 @@ public class MiniWindows extends javax.swing.JFrame {
                 posicion_usuario_logged = au.posicionUsuario(tf_login_user.getText());
 
                 JOptionPane.showMessageDialog(jd_login, "Welcome");
+                
+                jlb_desktop_user.setText(au.getListaUsuarios().get(posicion_usuario_logged).getUsuario());
 
                 jd_login.dispose();
                 tf_login_user.setText("");
@@ -2130,7 +2146,7 @@ public class MiniWindows extends javax.swing.JFrame {
         String t="";
         
         for (int i = 0; i < au.getListaUsuarios().get(posicion_usuario_logged).getListaMensajes().size(); i++) {
-            t+=""+au.getListaUsuarios().get(posicion_usuario_logged).getListaMensajes().get(i).getMensaje()+"\n";
+            t+=au.getListaUsuarios().get(posicion_usuario_logged).getListaMensajes().get(i).getEmisor()+": "+au.getListaUsuarios().get(posicion_usuario_logged).getListaMensajes().get(i).getMensaje()+"\n";
             
         }
         
@@ -2143,25 +2159,28 @@ public class MiniWindows extends javax.swing.JFrame {
 
     private void bt_msg_selectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_msg_selectMouseClicked
 
+        ta_msg_chatfield.setText("");
         adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
         au.leerUsuarioB();
 
         
         String s = "",t="";
         for (int i = 0; i < au.getListaUsuarios().size(); i++) {
-            s += i + " - " + au.getListaUsuarios().get(i).getUsuario() + "\n";
+            
+            s+= i + " - " + au.getListaUsuarios().get(i).getUsuario() + "\n";
 
         }
         boolean bo = true;
         while (bo) {
             try {
+                
                 posicion_seleccionado = Integer.parseInt(JOptionPane.showInputDialog(jd_messenger, s + "\n" + "Seleccione un usuario:"));
                 tf_msg_para.setText(au.getListaUsuarios().get(posicion_seleccionado).getUsuario());
                 
-                String user = au.getListaUsuarios().get(posicion_usuario_logged).getUsuario();
+                //String user = au.getListaUsuarios().get(posicion_usuario_logged).getListaMensajes().get(0).getEmisor();
                 
                 for (int i = 0; i < au.getListaUsuarios().get(posicion_usuario_logged).getListaMensajes().size(); i++) {
-                    t+=user+": "+au.getListaUsuarios().get(posicion_usuario_logged).getListaMensajes().get(i).getMensaje()+"\n";
+                    t+=au.getListaUsuarios().get(posicion_usuario_logged).getListaMensajes().get(i).getEmisor()+": "+au.getListaUsuarios().get(posicion_usuario_logged).getListaMensajes().get(i).getMensaje()+"\n";
 
                 }
 
@@ -2426,6 +2445,8 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JLabel jl_tb_socialnet;
     private javax.swing.JLabel jl_tb_text;
     private javax.swing.JLabel jlb_bg;
+    private javax.swing.JLabel jlb_desktop_hora;
+    private javax.swing.JLabel jlb_desktop_user;
     private javax.swing.JLabel jlb_msg_de;
     private javax.swing.JLabel jlb_player_intime;
     private javax.swing.JLabel jlb_player_outime;
