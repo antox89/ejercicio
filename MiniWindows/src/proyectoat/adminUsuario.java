@@ -62,12 +62,7 @@ public class adminUsuario implements Serializable{
         this.listaUsuarios.get(pos).getListaMensajes().add(m);
     }
     
-    public void enviarMensaje(int pos, Mensaje m){
-        
-        
-    }
-    
-    //buscar la posición del usuario
+    //buscar la posición del usuario por usuario
     public int posicionUsuario(String usuario){
         int n = listaUsuarios.size();
         for (int i = 0; i < n; i++) {
@@ -78,6 +73,8 @@ public class adminUsuario implements Serializable{
         }
         return -1;
     }
+    
+    
     
     //Verificar si ya existe el usuario
     public boolean buscarUsuario(String usuario){

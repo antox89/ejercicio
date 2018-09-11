@@ -154,6 +154,13 @@ public class MiniWindows extends javax.swing.JFrame {
         jList2 = new javax.swing.JList<>();
         jButton15 = new javax.swing.JButton();
         jd_netbeens = new javax.swing.JDialog();
+        jScrollPane14 = new javax.swing.JScrollPane();
+        jTree1 = new javax.swing.JTree();
+        jScrollPane15 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
+        jMenuBar6 = new javax.swing.JMenuBar();
+        jMenu8 = new javax.swing.JMenu();
+        jMenu9 = new javax.swing.JMenu();
         jd_login = new javax.swing.JDialog();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -693,7 +700,12 @@ public class MiniWindows extends javax.swing.JFrame {
 
         jLabel7.setText("Para:");
 
-        bt_msg_select.setText("Seleccionar...");
+        bt_msg_select.setText("...");
+        bt_msg_select.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_msg_selectMouseClicked(evt);
+            }
+        });
 
         jLabel11.setText("De:");
 
@@ -733,7 +745,7 @@ public class MiniWindows extends javax.swing.JFrame {
                         .addComponent(jlb_msg_de)))
                 .addGap(40, 40, 40)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -963,15 +975,47 @@ public class MiniWindows extends javax.swing.JFrame {
 
         jd_netbeens.setTitle("NetbEEns");
 
+        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Proyectos");
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Nuevo");
+        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("file.jaca");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Otro");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("new.jaca");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane14.setViewportView(jTree1);
+
+        jScrollPane15.setViewportView(jEditorPane1);
+
+        jMenu8.setText("File");
+        jMenuBar6.add(jMenu8);
+
+        jMenu9.setText("Edit");
+        jMenuBar6.add(jMenu9);
+
+        jd_netbeens.setJMenuBar(jMenuBar6);
+
         javax.swing.GroupLayout jd_netbeensLayout = new javax.swing.GroupLayout(jd_netbeens.getContentPane());
         jd_netbeens.getContentPane().setLayout(jd_netbeensLayout);
         jd_netbeensLayout.setHorizontalGroup(
             jd_netbeensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(jd_netbeensLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jd_netbeensLayout.setVerticalGroup(
             jd_netbeensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(jd_netbeensLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jd_netbeensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane15)
+                    .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jd_login.setTitle("Log In");
@@ -1945,7 +1989,7 @@ public class MiniWindows extends javax.swing.JFrame {
 
             if (au.validarUsuario(tf_login_user.getText(), tf_login_password.getText())) {
 
-                posicion_usuario = au.posicionUsuario(tf_login_user.getText());
+                posicion_usuario_logged = au.posicionUsuario(tf_login_user.getText());
 
                 JOptionPane.showMessageDialog(jd_login, "Welcome");
 
@@ -2044,7 +2088,7 @@ public class MiniWindows extends javax.swing.JFrame {
         adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
         au.leerUsuarioB();
 
-        JOptionPane.showMessageDialog(this, "Usuario acutal: " + au.getListaUsuarios().get(posicion_usuario).getUsuario());
+        JOptionPane.showMessageDialog(this, "Usuario acutal: " + au.getListaUsuarios().get(posicion_usuario_logged).getUsuario());
     }//GEN-LAST:event_jButton16MouseClicked
 
     private void jmi_ppm_chatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_ppm_chatActionPerformed
@@ -2053,10 +2097,12 @@ public class MiniWindows extends javax.swing.JFrame {
         au.leerUsuarioB();
 
         int row = jtree_msg_users.getLeadSelectionRow() - 1;
-        posicion_seleccionado = row - 1;
+
+        //posicion_seleccionado = row - 1;
         jtree_msg_users.setSelectionRow(row);
 
         tf_msg_para.setText(au.getListaUsuarios().get(row).getUsuario());
+        posicion_seleccionado = au.posicionUsuario(tf_msg_para.getText());
 
     }//GEN-LAST:event_jmi_ppm_chatActionPerformed
 
@@ -2065,20 +2111,50 @@ public class MiniWindows extends javax.swing.JFrame {
         adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
         au.leerUsuarioB();
 
-        Mensaje m = new Mensaje(au.getListaUsuarios().get(posicion_usuario).getUsuario(), 
-                au.getListaUsuarios().get(posicion_seleccionado).getUsuario(), "Hola Mundo");
-        
-        au.agregarMensaje(posicion_usuario, m);
+        Mensaje m = new Mensaje(au.getListaUsuarios().get(posicion_usuario_logged).getUsuario(),
+                au.getListaUsuarios().get(posicion_seleccionado).getUsuario(), ta_msg_txt.getText());
+
+        au.agregarMensaje(posicion_usuario_logged, m);
         au.agregarMensaje(posicion_seleccionado, m);
-        
+
         au.escribirUsuarioB();
-        
+
         au.leerUsuarioB();
-        System.out.println(au.getListaUsuarios().get(posicion_usuario).getListaMensajes().get(0).getMensaje());
+        System.out.println("Para:" + au.getListaUsuarios().get(posicion_seleccionado).getUsuario() + " \n" + au.getListaUsuarios().get(posicion_usuario_logged).getListaMensajes().get(0).getMensaje());
         //au.getListaUsuarios().get(posicion_usuario).getListaMensajes().add(m);
+
+        ta_msg_txt.setText("");
 
 
     }//GEN-LAST:event_bt_msg_sendTMouseClicked
+
+    private void bt_msg_selectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_msg_selectMouseClicked
+
+        adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
+        au.leerUsuarioB();
+
+        String s = "";
+        for (int i = 0; i < au.getListaUsuarios().size(); i++) {
+            s += i + " - " + au.getListaUsuarios().get(i).getUsuario() + "\n";
+
+        }
+        boolean bo = true;
+        while (bo) {
+            try {
+                posicion_seleccionado = Integer.parseInt(JOptionPane.showInputDialog(jd_messenger, s + "\n" + "Seleccione un usuario:"));
+                tf_msg_para.setText(au.getListaUsuarios().get(posicion_seleccionado).getUsuario());
+                bo = false;
+            } catch (java.lang.NumberFormatException e) {
+                JOptionPane.showMessageDialog(jd_messenger, "Ingrese únicamente los valores enumerados", "Error de Usuario", JOptionPane.ERROR_MESSAGE);
+                bo = true;
+            } catch (java.lang.IndexOutOfBoundsException e) {
+                JOptionPane.showMessageDialog(jd_messenger, "Ese número no está en la lista", "Error de Usuario", JOptionPane.ERROR_MESSAGE);
+                bo = true;
+            }
+        }
+
+
+    }//GEN-LAST:event_bt_msg_selectMouseClicked
 
     public void login() {
 
@@ -2140,7 +2216,7 @@ public class MiniWindows extends javax.swing.JFrame {
         adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
         au.leerUsuarioB();
 
-        jlb_msg_de.setText(au.getListaUsuarios().get(posicion_usuario).getUsuario());
+        jlb_msg_de.setText(au.getListaUsuarios().get(posicion_usuario_logged).getUsuario());
 
         DefaultTreeModel m = (DefaultTreeModel) jtree_msg_users.getModel();
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
@@ -2232,6 +2308,7 @@ public class MiniWindows extends javax.swing.JFrame {
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2253,11 +2330,14 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuBar jMenuBar4;
     private javax.swing.JMenuBar jMenuBar5;
+    private javax.swing.JMenuBar jMenuBar6;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
@@ -2280,6 +2360,8 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
+    private javax.swing.JScrollPane jScrollPane14;
+    private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -2296,6 +2378,7 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JTree jTree1;
     private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JDialog jd_admin_users;
     private javax.swing.JDialog jd_agenda;
@@ -2354,8 +2437,9 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JTree tree2;
     // End of variables declaration//GEN-END:variables
 
-    int posicion_usuario = -1;
+    int posicion_usuario_logged = -1;
     int posicion_seleccionado = -1;
+
     DefaultMutableTreeNode nodo_seleccionado;
     Usuario usuario_seleccionado;
 }
