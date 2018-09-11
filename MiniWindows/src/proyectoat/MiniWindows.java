@@ -117,7 +117,7 @@ public class MiniWindows extends javax.swing.JFrame {
         jd_messenger = new javax.swing.JDialog();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        ta_msg_chat = new javax.swing.JTextArea();
+        ta_msg_chatfield = new javax.swing.JTextArea();
         jScrollPane5 = new javax.swing.JScrollPane();
         ta_msg_txt = new javax.swing.JTextArea();
         bt_msg_send = new javax.swing.JButton();
@@ -674,9 +674,9 @@ public class MiniWindows extends javax.swing.JFrame {
 
         jd_messenger.setTitle("Messenger");
 
-        ta_msg_chat.setColumns(20);
-        ta_msg_chat.setRows(5);
-        jScrollPane4.setViewportView(ta_msg_chat);
+        ta_msg_chatfield.setColumns(20);
+        ta_msg_chatfield.setRows(5);
+        jScrollPane4.setViewportView(ta_msg_chatfield);
 
         ta_msg_txt.setColumns(20);
         ta_msg_txt.setRows(5);
@@ -1943,7 +1943,7 @@ public class MiniWindows extends javax.swing.JFrame {
         try {
 
             au.escribirMensaje();
-            ta_msg_chat.append("user01" + ":" + textoEnviar + "\n");
+            ta_msg_chatfield.append("user01" + ":" + textoEnviar + "\n");
             //JOptionPane.showMessageDialog(jd_messenger,"Mensaje envíado");
             ta_msg_txt.setText("");
 
@@ -2108,8 +2108,11 @@ public class MiniWindows extends javax.swing.JFrame {
 
     private void bt_msg_sendTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_msg_sendTMouseClicked
 
+        ta_msg_chatfield.setText("");
         adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
         au.leerUsuarioB();
+        
+        
 
         Mensaje m = new Mensaje(au.getListaUsuarios().get(posicion_usuario_logged).getUsuario(),
                 au.getListaUsuarios().get(posicion_seleccionado).getUsuario(), ta_msg_txt.getText());
@@ -2123,6 +2126,16 @@ public class MiniWindows extends javax.swing.JFrame {
         System.out.println("Para:" + au.getListaUsuarios().get(posicion_seleccionado).getUsuario() + " \n" + au.getListaUsuarios().get(posicion_usuario_logged).getListaMensajes().get(0).getMensaje());
         //au.getListaUsuarios().get(posicion_usuario).getListaMensajes().add(m);
 
+        
+        String t="";
+        
+        for (int i = 0; i < au.getListaUsuarios().get(posicion_usuario_logged).getListaMensajes().size(); i++) {
+            t+=""+au.getListaUsuarios().get(posicion_usuario_logged).getListaMensajes().get(i).getMensaje()+"\n";
+            
+        }
+        
+        ta_msg_chatfield.setText(t);
+        
         ta_msg_txt.setText("");
 
 
@@ -2133,7 +2146,8 @@ public class MiniWindows extends javax.swing.JFrame {
         adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
         au.leerUsuarioB();
 
-        String s = "";
+        
+        String s = "",t="";
         for (int i = 0; i < au.getListaUsuarios().size(); i++) {
             s += i + " - " + au.getListaUsuarios().get(i).getUsuario() + "\n";
 
@@ -2143,6 +2157,16 @@ public class MiniWindows extends javax.swing.JFrame {
             try {
                 posicion_seleccionado = Integer.parseInt(JOptionPane.showInputDialog(jd_messenger, s + "\n" + "Seleccione un usuario:"));
                 tf_msg_para.setText(au.getListaUsuarios().get(posicion_seleccionado).getUsuario());
+                
+                String user = au.getListaUsuarios().get(posicion_usuario_logged).getUsuario();
+                
+                for (int i = 0; i < au.getListaUsuarios().get(posicion_usuario_logged).getListaMensajes().size(); i++) {
+                    t+=user+": "+au.getListaUsuarios().get(posicion_usuario_logged).getListaMensajes().get(i).getMensaje()+"\n";
+
+                }
+
+                ta_msg_chatfield.setText(t);
+                
                 bo = false;
             } catch (java.lang.NumberFormatException e) {
                 JOptionPane.showMessageDialog(jd_messenger, "Ingrese únicamente los valores enumerados", "Error de Usuario", JOptionPane.ERROR_MESSAGE);
@@ -2424,7 +2448,7 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JPopupMenu ppm_chat;
     private javax.swing.JPopupMenu ppm_desktop;
     private javax.swing.JPopupMenu ppm_editor;
-    private javax.swing.JTextArea ta_msg_chat;
+    private javax.swing.JTextArea ta_msg_chatfield;
     private javax.swing.JTextArea ta_msg_txt;
     private javax.swing.JTextArea ta_reds_perfil_comment;
     private javax.swing.JTable tabla_reds_comments;
