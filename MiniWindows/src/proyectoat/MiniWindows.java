@@ -23,14 +23,20 @@ import java.util.Date;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
@@ -99,11 +105,11 @@ public class MiniWindows extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jlb_visor_pic = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        bt_visorimg_antes = new javax.swing.JButton();
+        bt_visorimg_despues = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
-        jButton18 = new javax.swing.JButton();
+        bt_visorimg_primera = new javax.swing.JButton();
+        bt_visorimg_ultima = new javax.swing.JButton();
         jMenuBar3 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -153,10 +159,10 @@ public class MiniWindows extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jd_redSocial = new javax.swing.JDialog();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        tpane = new javax.swing.JTabbedPane();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jt_amigos = new javax.swing.JList<>();
         jButton14 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jlb_redsocial_perfil_pic = new javax.swing.JLabel();
@@ -167,10 +173,13 @@ public class MiniWindows extends javax.swing.JFrame {
         ta_reds_perfil_comment = new javax.swing.JTextArea();
         jLabel10 = new javax.swing.JLabel();
         bt_reds_perfil_addcomment = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jScrollPane15 = new javax.swing.JScrollPane();
+        tabala = new javax.swing.JTable();
         jPanel12 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        jl_sn_red_users = new javax.swing.JList<>();
         jButton15 = new javax.swing.JButton();
         jd_netbeens = new javax.swing.JDialog();
         jScrollPane14 = new javax.swing.JScrollPane();
@@ -457,33 +466,33 @@ public class MiniWindows extends javax.swing.JFrame {
             .addComponent(jlb_visor_pic, javax.swing.GroupLayout.PREFERRED_SIZE, 481, Short.MAX_VALUE)
         );
 
-        jButton7.setText("<<");
-        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+        bt_visorimg_antes.setText("<<");
+        bt_visorimg_antes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton7MouseClicked(evt);
+                bt_visorimg_antesMouseClicked(evt);
             }
         });
 
-        jButton8.setText(">>");
-        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+        bt_visorimg_despues.setText(">>");
+        bt_visorimg_despues.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton8MouseClicked(evt);
+                bt_visorimg_despuesMouseClicked(evt);
             }
         });
 
         jButton9.setText("Seleccionar...");
 
-        jButton17.setText("|<");
-        jButton17.addMouseListener(new java.awt.event.MouseAdapter() {
+        bt_visorimg_primera.setText("|<");
+        bt_visorimg_primera.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton17MouseClicked(evt);
+                bt_visorimg_primeraMouseClicked(evt);
             }
         });
 
-        jButton18.setText(">|");
-        jButton18.addMouseListener(new java.awt.event.MouseAdapter() {
+        bt_visorimg_ultima.setText(">|");
+        bt_visorimg_ultima.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton18MouseClicked(evt);
+                bt_visorimg_ultimaMouseClicked(evt);
             }
         });
 
@@ -498,13 +507,13 @@ public class MiniWindows extends javax.swing.JFrame {
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(85, 85, 85)
-                        .addComponent(jButton17)
+                        .addComponent(bt_visorimg_primera)
                         .addGap(39, 39, 39)
-                        .addComponent(jButton7)
+                        .addComponent(bt_visorimg_antes)
                         .addGap(60, 60, 60)
-                        .addComponent(jButton8)
+                        .addComponent(bt_visorimg_despues)
                         .addGap(25, 25, 25)
-                        .addComponent(jButton18)
+                        .addComponent(bt_visorimg_ultima)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton9)))
                 .addContainerGap(19, Short.MAX_VALUE))
@@ -516,11 +525,11 @@ public class MiniWindows extends javax.swing.JFrame {
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8)
+                    .addComponent(bt_visorimg_antes)
+                    .addComponent(bt_visorimg_despues)
                     .addComponent(jButton9)
-                    .addComponent(jButton17)
-                    .addComponent(jButton18))
+                    .addComponent(bt_visorimg_primera)
+                    .addComponent(bt_visorimg_ultima))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
@@ -879,12 +888,18 @@ public class MiniWindows extends javax.swing.JFrame {
 
         jd_redSocial.setTitle("SocialNet");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        tpane.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tpaneStateChanged(evt);
+            }
+        });
+
+        jt_amigos.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane9.setViewportView(jList1);
+        jScrollPane9.setViewportView(jt_amigos);
 
         jButton14.setText("Eliminar");
 
@@ -930,6 +945,26 @@ public class MiniWindows extends javax.swing.JFrame {
             }
         });
 
+        jButton7.setText("jButton7");
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+        });
+
+        tabala.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane15.setViewportView(tabala);
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -943,19 +978,35 @@ public class MiniWindows extends javax.swing.JFrame {
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
                             .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
-                .addContainerGap(373, Short.MAX_VALUE))
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton7)
+                        .addGap(141, 141, 141))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jLabel10)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel10)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jButton7)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(bt_reds_perfil_addcomment)
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(bt_reds_perfil_addcomment)
+                        .addGap(35, 35, 35)
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -968,8 +1019,8 @@ public class MiniWindows extends javax.swing.JFrame {
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8)))
+                            .addComponent(jLabel8)
+                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -993,16 +1044,12 @@ public class MiniWindows extends javax.swing.JFrame {
             .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("Perfil", jPanel11);
+        tpane.addTab("Perfil", jPanel11);
 
         jLabel9.setText("Usuarios");
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane10.setViewportView(jList2);
+        jl_sn_red_users.setModel(new DefaultListModel());
+        jScrollPane10.setViewportView(jl_sn_red_users);
 
         jButton15.setText("Agregar");
 
@@ -1016,12 +1063,12 @@ public class MiniWindows extends javax.swing.JFrame {
                         .addGap(46, 46, 46)
                         .addComponent(jLabel9))
                     .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(46, 46, 46)
+                        .addComponent(jButton15))
                     .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jButton15)))
-                .addContainerGap(794, Short.MAX_VALUE))
+                        .addGap(22, 22, 22)
+                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(760, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1029,25 +1076,25 @@ public class MiniWindows extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton15)
-                .addContainerGap(290, Short.MAX_VALUE))
+                .addContainerGap(198, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Red", jPanel12);
+        tpane.addTab("Red", jPanel12);
 
         javax.swing.GroupLayout jd_redSocialLayout = new javax.swing.GroupLayout(jd_redSocial.getContentPane());
         jd_redSocial.getContentPane().setLayout(jd_redSocialLayout);
         jd_redSocialLayout.setHorizontalGroup(
             jd_redSocialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_redSocialLayout.createSequentialGroup()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 948, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tpane, javax.swing.GroupLayout.PREFERRED_SIZE, 948, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 35, Short.MAX_VALUE))
         );
         jd_redSocialLayout.setVerticalGroup(
             jd_redSocialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2)
+            .addComponent(tpane)
         );
 
         jd_netbeens.setTitle("NetbEEns");
@@ -1712,6 +1759,7 @@ public class MiniWindows extends javax.swing.JFrame {
     }//GEN-LAST:event_jl_tb_msgrMouseExited
 
     private void jl_tb_socialnetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_tb_socialnetMouseClicked
+        tpane.setSelectedIndex(0);
         mostrarSocialNet();
     }//GEN-LAST:event_jl_tb_socialnetMouseClicked
 
@@ -2100,7 +2148,7 @@ public class MiniWindows extends javax.swing.JFrame {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         JButton like = new JButton("like");
 
-        like.add(like);
+        //like.add(like);
 
         Object[] tabla = {comentario, dateFormat.format(fecha), like};
 
@@ -2357,7 +2405,7 @@ public class MiniWindows extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jep_netbeensMouseClicked
 
-    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+    private void bt_visorimg_despuesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_visorimg_despuesMouseClicked
         //botón next de imagenes
 
         posImg = posImg + 1;
@@ -2365,26 +2413,108 @@ public class MiniWindows extends javax.swing.JFrame {
             posImg = getImages().length - 1;
         }
         showImage(posImg);
-    }//GEN-LAST:event_jButton8MouseClicked
+    }//GEN-LAST:event_bt_visorimg_despuesMouseClicked
 
-    private void jButton17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton17MouseClicked
+    private void bt_visorimg_primeraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_visorimg_primeraMouseClicked
         posImg = 0;
         showImage(posImg);
-    }//GEN-LAST:event_jButton17MouseClicked
+    }//GEN-LAST:event_bt_visorimg_primeraMouseClicked
 
-    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+    private void bt_visorimg_antesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_visorimg_antesMouseClicked
         posImg = posImg - 1;
         if (posImg < 0) {
             posImg = 0;
         }
         showImage(posImg);
-    }//GEN-LAST:event_jButton7MouseClicked
+    }//GEN-LAST:event_bt_visorimg_antesMouseClicked
 
-    private void jButton18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton18MouseClicked
+    private void bt_visorimg_ultimaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_visorimg_ultimaMouseClicked
         posImg = getImages().length - 1;
         showImage(posImg);
-    }//GEN-LAST:event_jButton18MouseClicked
+    }//GEN-LAST:event_bt_visorimg_ultimaMouseClicked
 
+    private void tpaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tpaneStateChanged
+
+        if (tpane.getSelectedIndex() == 1) {
+
+            jl_sn_red_users.setModel(new DefaultListModel());
+            adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
+            au.leerUsuarioB();
+            
+            DefaultListModel modeloLista = (DefaultListModel)jl_sn_red_users.getModel();
+            String s="";
+            for (int i = 0; i < au.getListaUsuarios().size(); i++) {
+                s=au.getListaUsuarios().get(i).getUsuario()+"\n";
+                modeloLista.addElement(s);
+                jl_sn_red_users.setModel(modeloLista);
+            }
+            
+
+            DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Usuarios");
+            jtree_admin_users.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+            jScrollPane13.setViewportView(jtree_admin_users);
+
+            
+        }
+    }//GEN-LAST:event_tpaneStateChanged
+
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+        EachRowRendererEditor();
+    }//GEN-LAST:event_jButton7MouseClicked
+
+    public void EachRowRendererEditor() {
+        
+        String[] columnNames = {"Type", "Value"};
+        Object[][] data = {
+            {"String", "I'm a string"},
+            {"Date", new Date()},
+            {"Integer", new Integer(123)},
+            {"Double", new Double(123.45)},
+            {"Boolean", Boolean.TRUE}};
+        
+        tabala = new JTable(data, columnNames) {
+
+            private static final long serialVersionUID = 1L;
+            private Class editingClass;
+
+            @Override
+            public TableCellRenderer getCellRenderer(int row, int column) {
+                editingClass = null;
+                int modelColumn = convertColumnIndexToModel(column);
+                if (modelColumn == 1) {
+                    Class rowClass = getModel().getValueAt(row, modelColumn).getClass();
+                    return getDefaultRenderer(rowClass);
+                } else {
+                    return super.getCellRenderer(row, column);
+                }
+            }
+
+            @Override
+            public TableCellEditor getCellEditor(int row, int column) {
+                editingClass = null;
+                int modelColumn = convertColumnIndexToModel(column);
+                if (modelColumn == 1) {
+                    editingClass = getModel().getValueAt(row, modelColumn).getClass();
+                    return getDefaultEditor(editingClass);
+                } else {
+                    return super.getCellEditor(row, column);
+                }
+            }
+            //  This method is also invoked by the editor when the value in the editor
+            //  component is saved in the TableModel. The class was saved when the
+            //  editor was invoked so the proper class can be created.
+
+            @Override
+            public Class getColumnClass(int column) {
+                return editingClass != null ? editingClass : super.getColumnClass(column);
+            }
+        };
+        tabala.setPreferredScrollableViewportSize(tabala.getPreferredSize());
+        jScrollPane15 = new JScrollPane(tabala);
+        this.add(jScrollPane15);
+        
+    }
+    
     public String[] getImages() {
         File file = new File(getClass().getResource("/img/bg/").getFile());
 
@@ -2534,6 +2664,10 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JButton bt_msg_send;
     private javax.swing.JButton bt_msg_sendT;
     private javax.swing.JButton bt_reds_perfil_addcomment;
+    private javax.swing.JButton bt_visorimg_antes;
+    private javax.swing.JButton bt_visorimg_despues;
+    private javax.swing.JButton bt_visorimg_primera;
+    private javax.swing.JButton bt_visorimg_ultima;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -2542,15 +2676,12 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -2566,8 +2697,6 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
     private com.toedter.components.JLocaleChooser jLocaleChooser1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
@@ -2616,6 +2745,7 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane14;
+    private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -2631,7 +2761,6 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private com.toedter.components.JSpinField jSpinField1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JToolBar jToolBar1;
@@ -2650,6 +2779,7 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JDialog jd_visorImagenes;
     private javax.swing.JTextPane jep_netbeens;
     private javax.swing.JTextPane jep_texto;
+    private javax.swing.JList<String> jl_sn_red_users;
     private javax.swing.JLabel jl_tb_agenda;
     private javax.swing.JLabel jl_tb_cmd;
     private javax.swing.JLabel jl_tb_explorer;
@@ -2686,6 +2816,7 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmi_ppm_select;
     private javax.swing.JMenuItem jmi_ppm_setter;
     private javax.swing.JMenuItem jmi_ppm_tostring;
+    private javax.swing.JList<String> jt_amigos;
     private javax.swing.JTree jtree1;
     private javax.swing.JTree jtree_admin_users;
     private javax.swing.JTree jtree_msg_users;
@@ -2696,6 +2827,7 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JTextArea ta_msg_chatfield;
     private javax.swing.JTextArea ta_msg_txt;
     private javax.swing.JTextArea ta_reds_perfil_comment;
+    private javax.swing.JTable tabala;
     private javax.swing.JTable tabla_reds_comments;
     private javax.swing.JToggleButton tbt_b;
     private javax.swing.JPasswordField tf_admin_agregar_password;
@@ -2703,11 +2835,13 @@ public class MiniWindows extends javax.swing.JFrame {
     private javax.swing.JPasswordField tf_login_password;
     private javax.swing.JTextField tf_login_user;
     private javax.swing.JTextField tf_msg_para;
+    private javax.swing.JTabbedPane tpane;
     private javax.swing.JTree tree2;
     // End of variables declaration//GEN-END:variables
 
     int posicion_usuario_logged = -1;
     int posicion_seleccionado = -1;
+    int flag = 0;
 
     DefaultMutableTreeNode nodo_seleccionado;
     Usuario usuario_seleccionado;
