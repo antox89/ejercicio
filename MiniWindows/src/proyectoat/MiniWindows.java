@@ -1594,11 +1594,27 @@ public class MiniWindows extends javax.swing.JFrame {
         //JFileChooser jf = new JFileChooser("./");
         //jf.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         //int s = jf.showOpenDialog(this);
-        File f = new File("./Z/Usuarios");
+        adminUsuario au = new adminUsuario("./Z/Sistema/usr.att");
+        au.leerUsuarioB();
+        String usuario = au.getListaUsuarios().get(posicion_usuario_logged).getUsuario();
+        
+        if(usuario.equals("admin")){
+            File f = new File("./Z/Usuarios/");
 
-        //File f = jf.getSelectedFile();
-        modelo1.setRoot(new DefaultMutableTreeNode(f.getName()));
-        listarTodo(f, (DefaultMutableTreeNode) modelo1.getRoot());
+            modelo1.setRoot(new DefaultMutableTreeNode(f.getName()));
+            listarTodo(f, (DefaultMutableTreeNode) modelo1.getRoot());
+        
+        
+        
+        }else{
+            File f = new File("./Z/Usuarios/"+usuario+"/");
+
+        
+            modelo1.setRoot(new DefaultMutableTreeNode(f.getName()));
+            listarTodo(f, (DefaultMutableTreeNode) modelo1.getRoot());
+        }
+        
+        
         //listar_no_orden(f, (DefaultMutableTreeNode)modelo1.getRoot());
         
         mostrarFBI();
