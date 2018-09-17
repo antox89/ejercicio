@@ -411,6 +411,11 @@ public class MiniWindows extends javax.swing.JFrame {
         jMenu10.setText("File");
 
         jMenuItem4.setText("Nuevo");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu10.add(jMenuItem4);
 
         jMenuItem5.setText("Guardar");
@@ -418,6 +423,11 @@ public class MiniWindows extends javax.swing.JFrame {
         jMenu10.add(jSeparator3);
 
         jMenuItem6.setText("Cerrar");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu10.add(jMenuItem6);
 
         jMenuBar7.add(jMenu10);
@@ -1599,7 +1609,7 @@ public class MiniWindows extends javax.swing.JFrame {
         String usuario = au.getListaUsuarios().get(posicion_usuario_logged).getUsuario();
         
         if(usuario.equals("admin")){
-            File f = new File("./Z/Usuarios/");
+            File f = new File("./Z/");
 
             modelo1.setRoot(new DefaultMutableTreeNode(f.getName()));
             listarTodo(f, (DefaultMutableTreeNode) modelo1.getRoot());
@@ -2448,6 +2458,24 @@ public class MiniWindows extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_tpaneStateChanged
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        
+        if(jep_texto.getText().length()>0){
+            JOptionPane.showMessageDialog(jd_editorTexto,"Guardar cambios!");
+        }else{
+            jep_texto.setText("");
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        //cerrar sin guardar
+        if(jep_texto.getText().length()>0){
+            JOptionPane.showMessageDialog(jd_editorTexto,"Guardar cambios!");
+        }else{
+            jep_texto.setText("");
+        }
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     public void EachRowRendererEditor() {
         /*
